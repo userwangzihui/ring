@@ -1,0 +1,39 @@
+package com.j1902.shopping.controller;
+
+import com.j1902.shopping.pojo.Item;
+import com.j1902.shopping.service.AddItemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+@Controller
+public class AddItemController {
+    @Autowired
+    AddItemService addItemService;
+    @RequestMapping("/addItem")
+    public String addItem(Item item, MultipartFile file) throws IOException {
+        System.out.println("item = " + item);
+        //保存到服务器中的文件名
+        String systemFileName = null;
+        //服务器文件保存的位置
+        String systemUploadLocation = "G:/upload/";
+
+        //当上传的文件不为空时
+        if(!file.isEmpty()){
+            systemFileName = UUID.randomUUID().toString();
+            systemFileName = systemFileName + "-" + file.getOriginalFilename();
+            //上传文件
+            file.transferTo(new File(systemUploadLocation+systemFileName));
+
+            item.setItemImg1(systemFileName);
+        }
+        //修改数据库
+        addItemService.addItem(item);
+        return "back/goods";
+    }
+}

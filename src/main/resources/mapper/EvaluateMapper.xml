@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.j1902.shopping.mapper.EvaluateMapper">
+  <resultMap id="BaseResultMap" type="com.j1902.shopping.pojo.Evaluate">
+    <id column="eval_id" jdbcType="INTEGER" property="evalId" />
+    <result column="eval_user_id" jdbcType="INTEGER" property="evalUserId" />
+    <result column="eval_item_id" jdbcType="INTEGER" property="evalItemId" />
+    <result column="eval_item_name" jdbcType="VARCHAR" property="evalItemName" />
+    <result column="eval_create_time" jdbcType="TIMESTAMP" property="evalCreateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.j1902.shopping.pojo.Evaluate">
+    <result column="eval_info" jdbcType="LONGVARCHAR" property="evalInfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    eval_id, eval_user_id, eval_item_id, eval_item_name, eval_create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    eval_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.j1902.shopping.pojo.EvaluateExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.j1902.shopping.pojo.EvaluateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluate
+    where eval_id = #{evalId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from evaluate
+    where eval_id = #{evalId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.j1902.shopping.pojo.EvaluateExample">
+    delete from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.j1902.shopping.pojo.Evaluate">
+    insert into evaluate (eval_id, eval_user_id, eval_item_id, 
+      eval_item_name, eval_create_time, eval_info
+      )
+    values (#{evalId,jdbcType=INTEGER}, #{evalUserId,jdbcType=INTEGER}, #{evalItemId,jdbcType=INTEGER}, 
+      #{evalItemName,jdbcType=VARCHAR}, #{evalCreateTime,jdbcType=TIMESTAMP}, #{evalInfo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.j1902.shopping.pojo.Evaluate">
+    insert into evaluate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="evalId != null">
+        eval_id,
+      </if>
+      <if test="evalUserId != null">
+        eval_user_id,
+      </if>
+      <if test="evalItemId != null">
+        eval_item_id,
+      </if>
+      <if test="evalItemName != null">
+        eval_item_name,
+      </if>
+      <if test="evalCreateTime != null">
+        eval_create_time,
+      </if>
+      <if test="evalInfo != null">
+        eval_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="evalId != null">
+        #{evalId,jdbcType=INTEGER},
+      </if>
+      <if test="evalUserId != null">
+        #{evalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="evalItemId != null">
+        #{evalItemId,jdbcType=INTEGER},
+      </if>
+      <if test="evalItemName != null">
+        #{evalItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="evalCreateTime != null">
+        #{evalCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evalInfo != null">
+        #{evalInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.j1902.shopping.pojo.EvaluateExample" resultType="java.lang.Long">
+    select count(*) from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update evaluate
+    <set>
+      <if test="record.evalId != null">
+        eval_id = #{record.evalId,jdbcType=INTEGER},
+      </if>
+      <if test="record.evalUserId != null">
+        eval_user_id = #{record.evalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.evalItemId != null">
+        eval_item_id = #{record.evalItemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.evalItemName != null">
+        eval_item_name = #{record.evalItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evalCreateTime != null">
+        eval_create_time = #{record.evalCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.evalInfo != null">
+        eval_info = #{record.evalInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update evaluate
+    set eval_id = #{record.evalId,jdbcType=INTEGER},
+      eval_user_id = #{record.evalUserId,jdbcType=INTEGER},
+      eval_item_id = #{record.evalItemId,jdbcType=INTEGER},
+      eval_item_name = #{record.evalItemName,jdbcType=VARCHAR},
+      eval_create_time = #{record.evalCreateTime,jdbcType=TIMESTAMP},
+      eval_info = #{record.evalInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update evaluate
+    set eval_id = #{record.evalId,jdbcType=INTEGER},
+      eval_user_id = #{record.evalUserId,jdbcType=INTEGER},
+      eval_item_id = #{record.evalItemId,jdbcType=INTEGER},
+      eval_item_name = #{record.evalItemName,jdbcType=VARCHAR},
+      eval_create_time = #{record.evalCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.j1902.shopping.pojo.Evaluate">
+    update evaluate
+    <set>
+      <if test="evalUserId != null">
+        eval_user_id = #{evalUserId,jdbcType=INTEGER},
+      </if>
+      <if test="evalItemId != null">
+        eval_item_id = #{evalItemId,jdbcType=INTEGER},
+      </if>
+      <if test="evalItemName != null">
+        eval_item_name = #{evalItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="evalCreateTime != null">
+        eval_create_time = #{evalCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evalInfo != null">
+        eval_info = #{evalInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where eval_id = #{evalId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.j1902.shopping.pojo.Evaluate">
+    update evaluate
+    set eval_user_id = #{evalUserId,jdbcType=INTEGER},
+      eval_item_id = #{evalItemId,jdbcType=INTEGER},
+      eval_item_name = #{evalItemName,jdbcType=VARCHAR},
+      eval_create_time = #{evalCreateTime,jdbcType=TIMESTAMP},
+      eval_info = #{evalInfo,jdbcType=LONGVARCHAR}
+    where eval_id = #{evalId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.j1902.shopping.pojo.Evaluate">
+    update evaluate
+    set eval_user_id = #{evalUserId,jdbcType=INTEGER},
+      eval_item_id = #{evalItemId,jdbcType=INTEGER},
+      eval_item_name = #{evalItemName,jdbcType=VARCHAR},
+      eval_create_time = #{evalCreateTime,jdbcType=TIMESTAMP}
+    where eval_id = #{evalId,jdbcType=INTEGER}
+  </update>
+</mapper>

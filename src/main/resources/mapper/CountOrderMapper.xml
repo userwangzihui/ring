@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.j1902.shopping.mapper.CountOrderMapper">
+  <resultMap id="BaseResultMap" type="com.j1902.shopping.pojo.CountOrder">
+    <id column="count_id" jdbcType="INTEGER" property="countId" />
+    <result column="count_userid" jdbcType="INTEGER" property="countUserid" />
+    <result column="count_remarks" jdbcType="VARCHAR" property="countRemarks" />
+    <result column="count_createtime" jdbcType="TIMESTAMP" property="countCreatetime" />
+    <result column="count_method" jdbcType="VARCHAR" property="countMethod" />
+    <result column="count_money" jdbcType="DOUBLE" property="countMoney" />
+    <result column="count_sat" jdbcType="VARCHAR" property="countSat" />
+    <result column="count_username" jdbcType="VARCHAR" property="countUsername" />
+    <result column="count_phone" jdbcType="VARCHAR" property="countPhone" />
+    <result column="count_address" jdbcType="VARCHAR" property="countAddress" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    count_id, count_userid, count_remarks, count_createtime, count_method, count_money, 
+    count_sat, count_username, count_phone, count_address
+  </sql>
+  <select id="selectByExample" parameterType="com.j1902.shopping.pojo.CountOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from count_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from count_order
+    where count_id = #{countId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from count_order
+    where count_id = #{countId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.j1902.shopping.pojo.CountOrderExample">
+    delete from count_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.j1902.shopping.pojo.CountOrder">
+    insert into count_order (count_id, count_userid, count_remarks, 
+      count_createtime, count_method, count_money, 
+      count_sat, count_username, count_phone, 
+      count_address)
+    values (#{countId,jdbcType=INTEGER}, #{countUserid,jdbcType=INTEGER}, #{countRemarks,jdbcType=VARCHAR}, 
+      #{countCreatetime,jdbcType=TIMESTAMP}, #{countMethod,jdbcType=VARCHAR}, #{countMoney,jdbcType=DOUBLE}, 
+      #{countSat,jdbcType=VARCHAR}, #{countUsername,jdbcType=VARCHAR}, #{countPhone,jdbcType=VARCHAR}, 
+      #{countAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.j1902.shopping.pojo.CountOrder">
+    insert into count_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="countId != null">
+        count_id,
+      </if>
+      <if test="countUserid != null">
+        count_userid,
+      </if>
+      <if test="countRemarks != null">
+        count_remarks,
+      </if>
+      <if test="countCreatetime != null">
+        count_createtime,
+      </if>
+      <if test="countMethod != null">
+        count_method,
+      </if>
+      <if test="countMoney != null">
+        count_money,
+      </if>
+      <if test="countSat != null">
+        count_sat,
+      </if>
+      <if test="countUsername != null">
+        count_username,
+      </if>
+      <if test="countPhone != null">
+        count_phone,
+      </if>
+      <if test="countAddress != null">
+        count_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="countId != null">
+        #{countId,jdbcType=INTEGER},
+      </if>
+      <if test="countUserid != null">
+        #{countUserid,jdbcType=INTEGER},
+      </if>
+      <if test="countRemarks != null">
+        #{countRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="countCreatetime != null">
+        #{countCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countMethod != null">
+        #{countMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="countMoney != null">
+        #{countMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="countSat != null">
+        #{countSat,jdbcType=VARCHAR},
+      </if>
+      <if test="countUsername != null">
+        #{countUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="countPhone != null">
+        #{countPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="countAddress != null">
+        #{countAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.j1902.shopping.pojo.CountOrderExample" resultType="java.lang.Long">
+    select count(*) from count_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update count_order
+    <set>
+      <if test="record.countId != null">
+        count_id = #{record.countId,jdbcType=INTEGER},
+      </if>
+      <if test="record.countUserid != null">
+        count_userid = #{record.countUserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.countRemarks != null">
+        count_remarks = #{record.countRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countCreatetime != null">
+        count_createtime = #{record.countCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.countMethod != null">
+        count_method = #{record.countMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countMoney != null">
+        count_money = #{record.countMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.countSat != null">
+        count_sat = #{record.countSat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countUsername != null">
+        count_username = #{record.countUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countPhone != null">
+        count_phone = #{record.countPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countAddress != null">
+        count_address = #{record.countAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update count_order
+    set count_id = #{record.countId,jdbcType=INTEGER},
+      count_userid = #{record.countUserid,jdbcType=INTEGER},
+      count_remarks = #{record.countRemarks,jdbcType=VARCHAR},
+      count_createtime = #{record.countCreatetime,jdbcType=TIMESTAMP},
+      count_method = #{record.countMethod,jdbcType=VARCHAR},
+      count_money = #{record.countMoney,jdbcType=DOUBLE},
+      count_sat = #{record.countSat,jdbcType=VARCHAR},
+      count_username = #{record.countUsername,jdbcType=VARCHAR},
+      count_phone = #{record.countPhone,jdbcType=VARCHAR},
+      count_address = #{record.countAddress,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.j1902.shopping.pojo.CountOrder">
+    update count_order
+    <set>
+      <if test="countUserid != null">
+        count_userid = #{countUserid,jdbcType=INTEGER},
+      </if>
+      <if test="countRemarks != null">
+        count_remarks = #{countRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="countCreatetime != null">
+        count_createtime = #{countCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countMethod != null">
+        count_method = #{countMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="countMoney != null">
+        count_money = #{countMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="countSat != null">
+        count_sat = #{countSat,jdbcType=VARCHAR},
+      </if>
+      <if test="countUsername != null">
+        count_username = #{countUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="countPhone != null">
+        count_phone = #{countPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="countAddress != null">
+        count_address = #{countAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where count_id = #{countId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.j1902.shopping.pojo.CountOrder">
+    update count_order
+    set count_userid = #{countUserid,jdbcType=INTEGER},
+      count_remarks = #{countRemarks,jdbcType=VARCHAR},
+      count_createtime = #{countCreatetime,jdbcType=TIMESTAMP},
+      count_method = #{countMethod,jdbcType=VARCHAR},
+      count_money = #{countMoney,jdbcType=DOUBLE},
+      count_sat = #{countSat,jdbcType=VARCHAR},
+      count_username = #{countUsername,jdbcType=VARCHAR},
+      count_phone = #{countPhone,jdbcType=VARCHAR},
+      count_address = #{countAddress,jdbcType=VARCHAR}
+    where count_id = #{countId,jdbcType=INTEGER}
+  </update>
+</mapper>
