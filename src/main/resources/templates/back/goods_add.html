@@ -291,7 +291,7 @@
 
 				<div class="row">
 					<div class="col-xs-12">
-						<form action="" class="form-horizontal" id="frm" enctype="multipart/form-data">
+						<form action="http://localhost:8080/addItem" class="form-horizontal" id="frm" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right" >商品名称</label>
 
@@ -378,28 +378,29 @@
 								<label class="col-sm-3 control-label no-padding-right">商品图片1</label>
 
 								<div class="col-sm-9" style="max-width: 360px;">
-									<input type="file" id="img-1" name="file"/>
+									<input type="file"  name="file" id="img-1"/>
+									<!---->
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right" >商品图片2</label>
 
 								<div class="col-sm-9" style="max-width: 360px;">
-									<input type="file" id="img-2"/>
+									<input type="file" id="img-2" name="file1"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right" >商品图片3</label>
 
 								<div class="col-sm-9" style="max-width: 360px;">
-									<input type="file" id="img-3"/>
+									<input type="file" id="img-3" name="file2"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right" >商品图片4</label>
 
 								<div class="col-sm-9" style="max-width: 360px;">
-									<input type="file" id="img-4"/>
+									<input type="file" id="img-4" name="file3"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -486,17 +487,17 @@
 		});
 		/***************/
 	})
-	$("#btn").click(function () {
-		var formData =$("#frm").serialize();
-
-		$.post("http://localhost:8080/addItem",formData,function (data) {
-			// if (data.state) {
-			// 	window.location = "http://localhost:8080/order";
-			// }else {
-			// 	window.location = "http://localhost:8080/login";
-			// }
-		});
-	})
+	// $("#btn").click(function () {
+	// 	var formData =$("#frm").serialize();
+	//
+	// 	$.post("http://localhost:8080/addItem",formData,function (data) {
+	// 		// if (data.state) {
+	// 		// 	window.location = "http://localhost:8080/order";
+	// 		// }else {
+	// 		// 	window.location = "http://localhost:8080/login";
+	// 		// }
+	// 	});
+	// })
 </script>
 </body>
 </html>

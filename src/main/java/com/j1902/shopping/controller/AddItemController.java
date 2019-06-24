@@ -16,7 +16,7 @@ public class AddItemController {
     @Autowired
     AddItemService addItemService;
     @RequestMapping("/addItem")
-    public String addItem(Item item, MultipartFile file) throws IOException {
+    public String addItem(Item item,MultipartFile file,MultipartFile file1,MultipartFile file2,MultipartFile file3) throws IOException {
         System.out.println("item = " + item);
         //保存到服务器中的文件名
         String systemFileName = null;
@@ -29,8 +29,28 @@ public class AddItemController {
             systemFileName = systemFileName + "-" + file.getOriginalFilename();
             //上传文件
             file.transferTo(new File(systemUploadLocation+systemFileName));
-
             item.setItemImg1(systemFileName);
+        }
+        if(!file1.isEmpty()){
+            systemFileName = UUID.randomUUID().toString();
+            systemFileName = systemFileName + "-" + file.getOriginalFilename();
+            //上传文件
+            file.transferTo(new File(systemUploadLocation+systemFileName));
+            item.setItemImg2(systemFileName);
+        }
+        if(!file2.isEmpty()){
+            systemFileName = UUID.randomUUID().toString();
+            systemFileName = systemFileName + "-" + file.getOriginalFilename();
+            //上传文件
+            file.transferTo(new File(systemUploadLocation+systemFileName));
+            item.setItemImg3(systemFileName);
+        }
+        if(!file3.isEmpty()){
+            systemFileName = UUID.randomUUID().toString();
+            systemFileName = systemFileName + "-" + file.getOriginalFilename();
+            //上传文件
+            file.transferTo(new File(systemUploadLocation+systemFileName));
+            item.setItemImg4(systemFileName);
         }
         //修改数据库
         addItemService.addItem(item);

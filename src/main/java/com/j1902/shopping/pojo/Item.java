@@ -25,6 +25,27 @@ public class Item {
 
     private String itemImg4;
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId=" + itemId +
+                ", itemName='" + itemName + '\'' +
+                ", itemSeries='" + itemSeries + '\'' +
+                ", itemType='" + itemType + '\'' +
+                ", itemHeight='" + itemHeight + '\'' +
+                ", itemSize='" + itemSize + '\'' +
+                ", itemNumber=" + itemNumber +
+                ", itemPrice=" + itemPrice +
+                ", itemImg1='" + itemImg1 + '\'' +
+                ", itemImg2='" + itemImg2 + '\'' +
+                ", itemImg3='" + itemImg3 + '\'' +
+                ", itemImg4='" + itemImg4 + '\'' +
+                ", itmeInfo='" + itmeInfo + '\'' +
+                ", itmeBuynumber=" + itmeBuynumber +
+                ", itmeEval=" + itmeEval +
+                '}';
+    }
+
     private String itmeInfo;
 
     private Integer itmeBuynumber;
