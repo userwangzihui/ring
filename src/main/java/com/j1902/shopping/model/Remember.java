@@ -13,6 +13,9 @@ public class Remember extends Admin {
         return remember;
     }
 
+    public Remember() {
+    }
+
     public void setRemember(String remember) {
         this.remember = remember;
     }

@@ -63,18 +63,18 @@
 
 											<div class="space-6"></div>
 
-											<form id="frm" method="post" >
+											<form id="frm" action="/adminLogin" method="post" >
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Admin" name="adminName" th:value="${AdminName}" />
+															<input type="text" class="form-control" placeholder="Admin" name="adminName" th:value="${session.adminName}" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" name="adminPwd" th:value="${password}"/>
+															<input type="password" class="form-control" placeholder="Password" name="adminPwd" th:value="${session.adminPwd}"/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -83,7 +83,8 @@
 
 													<div class="clearfix">
 														<label class="inline">
-															<input type="checkbox" class="ace" name="remember" value="true" />
+															<input id="sp1" type="hidden" th:value="${session.adminRemember}">
+															<input id="sp2" type="checkbox" class="ace" name="remember"/>
 															<span class="lbl"> Remember Me</span>
 														</label>
 
@@ -139,8 +140,16 @@
 		<script src="../../static/js/jquery.serializejson.min.js"></script>
 <![endif]-->
 		<script type="text/javascript">
+			var value = $("#sp1").val();
+			console.log("值为："+value)
+			if (value=="on"){
+				console.log("设置成功了！！！")
+				$("#sp2").attr("checked","checked");
+			}
 			if('ontouchstart' in document.documentElement) document.write("<script src='../../static/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-			// $("#btn").click(function () {
+			 $("#btn").click(function () {
+			 	$("#frm").submit();
+			 })
 			//
 			// 	var formData =$("#frm").serialize();
 			// 	console.log(formData)
