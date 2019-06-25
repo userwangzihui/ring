@@ -26,7 +26,7 @@ public class AddItemController {
         //保存到服务器中的文件名
         String systemFileName = null;
         //服务器文件保存的位置
-        String systemUploadLocation = "G:/upload/";
+        String systemUploadLocation = "http://localhost:8080/upload";
 
         //当上传的文件不为空时
         if(!file.isEmpty()){

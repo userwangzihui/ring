@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ItemService {
     public List<Item> getByItem();
+    public List<Item> getByBuyNumber();
 }

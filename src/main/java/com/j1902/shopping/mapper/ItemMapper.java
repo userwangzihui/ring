@@ -14,11 +14,14 @@ public interface ItemMapper {
 
     int deleteByPrimaryKey(Integer itemId);
 
+
     int insert(Item record);
 
     int insertSelective(Item record);
 
     List<Item> selectByExample(ItemExample example);
+
+    List<Item> getByBuyNumber(Integer itmeBuynumber);
 
     Item selectByPrimaryKey(Integer itemId);
 

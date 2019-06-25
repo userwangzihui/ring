@@ -56,7 +56,7 @@ public class AdminLoginController {
             session.setAttribute("ADMIN_LOGIN", admin);
             return "back/order";
         }
-        return "back/AdminLogin";
+        return "back/login";
 
     }
 

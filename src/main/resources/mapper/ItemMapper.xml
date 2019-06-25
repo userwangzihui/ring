@@ -77,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    item_id, item_name, item_series, item_type, item_height, item_size, item_number, 
-    item_price, item_img1, item_img2, item_img3, item_img4, itme_info, itme_buynumber, 
+    item_id, item_name, item_series, item_type, item_height, item_size, item_number,
+    item_price, item_img1, item_img2, item_img3, item_img4, itme_info, itme_buynumber,
     itme_eval
   </sql>
   <select id="selectByExample" parameterType="com.j1902.shopping.pojo.ItemExample" resultMap="BaseResultMap">
@@ -96,7 +96,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from item
     where item_id = #{itemId,jdbcType=INTEGER}
@@ -112,16 +112,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.j1902.shopping.pojo.Item">
-    insert into item (item_id, item_name, item_series, 
-      item_type, item_height, item_size, 
-      item_number, item_price, item_img1, 
-      item_img2, item_img3, item_img4, 
+    insert into item (item_id, item_name, item_series,
+      item_type, item_height, item_size,
+      item_number, item_price, item_img1,
+      item_img2, item_img3, item_img4,
       itme_info, itme_buynumber, itme_eval
       )
-    values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemSeries,jdbcType=VARCHAR}, 
-      #{itemType,jdbcType=VARCHAR}, #{itemHeight,jdbcType=VARCHAR}, #{itemSize,jdbcType=VARCHAR}, 
-      #{itemNumber,jdbcType=INTEGER}, #{itemPrice,jdbcType=DOUBLE}, #{itemImg1,jdbcType=VARCHAR}, 
-      #{itemImg2,jdbcType=VARCHAR}, #{itemImg3,jdbcType=VARCHAR}, #{itemImg4,jdbcType=VARCHAR}, 
+    values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemSeries,jdbcType=VARCHAR},
+      #{itemType,jdbcType=VARCHAR}, #{itemHeight,jdbcType=VARCHAR}, #{itemSize,jdbcType=VARCHAR},
+      #{itemNumber,jdbcType=INTEGER}, #{itemPrice,jdbcType=DOUBLE}, #{itemImg1,jdbcType=VARCHAR},
+      #{itemImg2,jdbcType=VARCHAR}, #{itemImg3,jdbcType=VARCHAR}, #{itemImg4,jdbcType=VARCHAR},
       #{itmeInfo,jdbcType=VARCHAR}, #{itmeBuynumber,jdbcType=INTEGER}, #{itmeEval,jdbcType=INTEGER}
       )
   </insert>
@@ -368,4 +368,14 @@
       itme_eval = #{itmeEval,jdbcType=INTEGER}
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
+  <select id="getByBuyNumber" parameterType="com.j1902.shopping.pojo.Item" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    item
+    order by
+    itme_buynumber
+    desc
+
+  </select>
 </mapper>
