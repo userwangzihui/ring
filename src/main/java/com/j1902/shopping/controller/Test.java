@@ -1,7 +1,10 @@
 package com.j1902.shopping.controller;
 
 import com.j1902.shopping.pojo.Admin;
+import com.j1902.shopping.pojo.Item;
+import com.j1902.shopping.service.ItemService;
 import com.j1902.shopping.utils.JsonUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,11 +12,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class Test {
-    @RequestMapping("/login")
+    @Autowired
+    ItemService itemService;
+    @RequestMapping("/AdminLogin")
     public String L(HttpServletRequest request,Map<String,Object>map) throws UnsupportedEncodingException {
         Cookie[] cookies = request.getCookies();
         Admin cookAdmin = null;
@@ -38,9 +44,10 @@ public class Test {
 
     }
     @RequestMapping("/order")
-    public String Order() {
-            return "back/goods";
-
+    public String Order(Map<String,Object>map) {
+        List<Item> byItem = itemService.getByItem();
+        map.put("ITEM",byItem);
+        return "back/goods";
     }
    @RequestMapping("/goodsAdd")
     public String goodsAdd(){

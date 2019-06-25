@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
@@ -310,21 +310,22 @@
 											</thead>
 
 											<tbody>
-												<tr>
-													<td class="center"> 1 </td>
-													<td class="center">
+
+												<tr th:each="item :${ITEM}">
+													<td class="center" th:text="${item.getItemId()}"></td>
+													<td class="center" >
 														<div class="action-buttons">
 															<a href="#" class="green bigger-140 show-details-btn" title="Show Details">
 																<i class="ace-icon fa fa-angle-double-down"></i>
 															</a>
 														</div>
 													</td>
-													<td class="center">mylove系列</td>
-													<td class="center">$45</td>
-													<td class="hidden-480 center">3,330</td>
-													<td class="center">Feb 12</td>
-													<td class="hidden-480 center"> 500 </td>
-													<td class="center">钟爱一生</td>
+													<td class="center" th:text="${item.getItemName()}"></td>
+													<td class="center" th:text="${item.getItemSeries()}"></td>
+													<td class="hidden-480 center" th:text="${item.getItemType()}"></td>
+													<td class="center"th:text="${item.getItemPrice()}"></td>
+													<td class="hidden-480 center" th:text="${item.getItemNumber()}"></td>
+													<td class="center" th:text="${item.getItmeInfo()}"></td>
 													<td class="center">
 														<div class="hidden-sm hidden-xs">
 															<button class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-table">
@@ -334,11 +335,10 @@
 																<i class="ace-icon fa fa-trash-o bigger-120"></i>
 															</button>
 														</div>
-														</div>
 													</td>
 												</tr>
 
-												<tr class="detail-row">
+												<tr class="detail-row"th:each="item :${ITEM}"  >
 													<td colspan="9">
 														<div class="table-detail">
 															<div class="row">
@@ -550,6 +550,7 @@
 				});
 				/***************/
 			})
+
 		</script>
 	</body>
 </html>
