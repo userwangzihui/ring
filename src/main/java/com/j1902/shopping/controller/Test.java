@@ -1,7 +1,9 @@
 package com.j1902.shopping.controller;
 
+import com.j1902.shopping.model.Remember;
 import com.j1902.shopping.pojo.Admin;
 import com.j1902.shopping.pojo.Item;
+import com.j1902.shopping.service.AdminService;
 import com.j1902.shopping.service.ItemService;
 import com.j1902.shopping.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
@@ -18,40 +21,49 @@ import java.util.Map;
 @Controller
 public class Test {
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
+    @Autowired
+    private AdminService adminService;
+
     @RequestMapping("/AdminLogin")
-    public String L(HttpServletRequest request,Map<String,Object>map) throws UnsupportedEncodingException {
-        Cookie[] cookies = request.getCookies();
-        Admin cookAdmin = null;
-
-        if (cookies != null && cookies.length > 0) {
-            System.out.println(22222);
-            for (Cookie c : cookies) {
-                if ("AUTO_LOGIN_ADMIN_INFO".equals(c.getName())) {
-                    String userJson = c.getValue();
-                    userJson = URLDecoder.decode(userJson, "UTF-8");
-                    cookAdmin = JsonUtils.jsonToPojo(userJson, Admin.class);
-                    map.put("AdminName", cookAdmin.getAdminName());
-                    System.out.println("cookAdmin.getAdminName() = " + cookAdmin.getAdminName());
-                    map.put("password", cookAdmin.getAdminPwd());
-                }
+    public String L(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws UnsupportedEncodingException {
+        Remember cookAdmin = adminService.showPwd(request);
+        System.out.println("好烦："+cookAdmin);
+        if (cookAdmin != null) {
+            System.out.println("方式1");
+            session.setAttribute("adminName", cookAdmin.getAdminName());
+            session.setAttribute("adminPwd", cookAdmin.getAdminPwd());
+            session.setAttribute("adminRemember", cookAdmin.getRemember());
+        } else {
+            System.out.println("方式2");
+            if (session.getAttribute("to")== null&&session.getAttribute("one")==null) {
+                System.out.println("方式3");
+                session.removeAttribute("adminName");
+                session.removeAttribute("adminPwd");
+                session.removeAttribute("adminRemember");
+            } else if (session.getAttribute("to")==null&&session.getAttribute("one")!=null){
+                session.removeAttribute("adminRemember");
+                session.removeAttribute("one");
+            }else {
+                session.removeAttribute("to");
+                session.removeAttribute("one");
             }
-
-
         }
         return "back/login";
 
     }
+
     @RequestMapping("/order")
-    public String Order(Map<String,Object>map) {
+    public String Order(Map<String, Object> map) {
         List<Item> byItem = itemService.getByItem();
-        map.put("ITEM",byItem);
+        map.put("ITEM", byItem);
         return "back/goods";
     }
-   @RequestMapping("/goodsAdd")
-    public String goodsAdd(){
+
+    @RequestMapping("/goodsAdd")
+    public String goodsAdd() {
         return "back/goods_add";
-   }
+    }
 
 
 

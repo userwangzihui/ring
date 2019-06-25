@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Map;
 
 @Controller
 public class AdminLoginController {
@@ -25,39 +26,28 @@ public class AdminLoginController {
     AdminService adminService;
 
     @RequestMapping("/adminLogin")
-
-    public String adminLogin(Remember remember, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public String adminLogin(Remember remember, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         System.out.println("remember = " + remember);
-        Admin admin = new Admin();
-        admin.setAdminName(remember.getAdminName());
-        admin.setAdminPwd(remember.getAdminPwd());
-        System.out.println("admin = " + admin);
-        Result result = new Result();
-        if (adminService.getByName(admin)) {
-            if ("true".equals(remember.getRemember())) {
-
-                String userJson = JsonUtils.objectToJson(admin);
-                Cookie cookie = new Cookie("AUTO_LOGIN_ADMIN_INFO", URLEncoder.encode(userJson, "UTF-8"));
-                cookie.setMaxAge(3600 * 24 * 30);
-                response.addCookie(cookie);
-            }else {
-                Cookie[] cookies = request.getCookies();
-                if (cookies != null && cookies.length > 0) {
-                    for (Cookie cookie : cookies) {
-                        if ("AUTO_LOGIN_ADMIN_INFO".equals(cookie.getName())){
-                            cookie.setMaxAge(0);
-                        }
-                    }
-                }
-
+        if (adminService.getByName(remember)) {
+            if ("on".equals(remember.getRemember())) {
+                System.out.println("存执1111");
+                adminService.rememberPwd(response, remember);
+            } else {
+                System.out.println("储值2222222");
+                adminService.forgetPwd(request, response);
             }
-            result.setState(true);
-            HttpSession session = request.getSession();
-            session.setAttribute("ADMIN_LOGIN", admin);
-            return "back/order";
+            session.setAttribute("ADMIN_LOGIN", remember);
+            return "redirect:order";
+        } else {
+            adminService.forgetPwd(request, response);
+            session.setAttribute("adminName", remember.getAdminName());
+            session.setAttribute("one", "ok");
+            if ("on".equals(remember.getRemember())) {
+                session.setAttribute("to", "ok");
+                session.setAttribute("adminRemember", remember.getRemember());
+            }
+            return "redirect:AdminLogin";
         }
-        return "back/login";
 
     }
-
 }

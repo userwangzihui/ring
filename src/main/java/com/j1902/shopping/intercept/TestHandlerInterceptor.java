@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 public class TestHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("TestHandlerInterceptor.preHandle");
+    /*    System.out.println("TestHandlerInterceptor.preHandle");
         String contextPath = request.getContextPath();
         System.out.println("contextPath = " + contextPath);
+        System.out.println("这个是："+handler);
         String requestURI = request.getRequestURI();
-        System.out.println("requestURI = " + requestURI);
+        System.out.println("requestURI = " + requestURI);*/
         return true;
     }
 
