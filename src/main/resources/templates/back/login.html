@@ -140,18 +140,18 @@
 <![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='../../static/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-			$("#btn").click(function () {
-
-				var formData =$("#frm").serialize();
-				console.log(formData)
-				$.post("http://localhost:8080/adminLogin",formData,function (data) {
-					if (data.state) {
-						window.location = "http://localhost:8080/order";
-					}else {
-						window.location = "http://localhost:8080/login";
-					}
-				});
-			});
+			// $("#btn").click(function () {
+			//
+			// 	var formData =$("#frm").serialize();
+			// 	console.log(formData)
+			// 	$.post("http://localhost:8080/adminLogin",formData,function (data) {
+			// 		if (data.state) {
+			// 			window.location = "http://localhost:8080/order";
+			// 		}else {
+			// 			window.location = "http://localhost:8080/login";
+			// 		}
+			// 	});
+			// });
 		</script>
 	</body>
 </html>

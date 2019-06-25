@@ -25,31 +25,39 @@ public class AdminLoginController {
     AdminService adminService;
 
     @RequestMapping("/adminLogin")
-    @ResponseBody
-    public Result adminLogin(Remember remember, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+
+    public String adminLogin(Remember remember, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         System.out.println("remember = " + remember);
         Admin admin = new Admin();
         admin.setAdminName(remember.getAdminName());
         admin.setAdminPwd(remember.getAdminPwd());
         System.out.println("admin = " + admin);
         Result result = new Result();
-     if (adminService.getByName(admin)){
-         if ("true".equals(remember.getRemember())){
-             System.out.println(111111);
-             String userJson = JsonUtils.objectToJson(admin);
-             Cookie cookie = new Cookie("AUTO_LOGIN_ADMIN_INFO", URLEncoder.encode(userJson,"UTF-8"));
-             cookie.setMaxAge(3600*24*30);
-            response.addCookie(cookie);
-         }
-         result.setState(true);
-         HttpSession session = request.getSession();
-         session.setAttribute("ADMIN_LOGIN",admin);
+        if (adminService.getByName(admin)) {
+            if ("true".equals(remember.getRemember())) {
 
+                String userJson = JsonUtils.objectToJson(admin);
+                Cookie cookie = new Cookie("AUTO_LOGIN_ADMIN_INFO", URLEncoder.encode(userJson, "UTF-8"));
+                cookie.setMaxAge(3600 * 24 * 30);
+                response.addCookie(cookie);
+            }else {
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null && cookies.length > 0) {
+                    for (Cookie cookie : cookies) {
+                        if ("AUTO_LOGIN_ADMIN_INFO".equals(cookie.getName())){
+                            cookie.setMaxAge(0);
+                        }
+                    }
+                }
 
-         return result;
-     }
-     result.setState(false);
-       return result;
+            }
+            result.setState(true);
+            HttpSession session = request.getSession();
+            session.setAttribute("ADMIN_LOGIN", admin);
+            return "back/order";
+        }
+        return "back/AdminLogin";
 
     }
+
 }

@@ -34,7 +34,6 @@ public class Test {
                     map.put("AdminName", cookAdmin.getAdminName());
                     System.out.println("cookAdmin.getAdminName() = " + cookAdmin.getAdminName());
                     map.put("password", cookAdmin.getAdminPwd());
-                    return "back/login";
                 }
             }
 

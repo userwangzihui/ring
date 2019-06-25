@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AdminService {
     public boolean getByName(Admin admin);
+
 }
