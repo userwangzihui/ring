@@ -1,4 +1,4 @@
-﻿<html class="hb-loaded">
+﻿<html class="hb-loaded" xmlns:th="http://www.w3.org/1999/xhtml">
 
 	<head>
 		<meta charset="utf-8" />
@@ -37,20 +37,21 @@
 					<div class="cort-right right">
 						<div class="r_bg"></div>
 						<!--登陆框内-->
-						<form method="post" action="login.html" id="loginform">
+						<form method="post" action="/logins" id="loginform">
 							<div class="cr_border">
 								<h3></h3>
 								<!--手机-->
+								<p id="loginFail" th:text="${loginFail}"></p>
 								<div id="cssName" class="the_input ">
 									<span class="member"></span>
-									<input type="text" placeholder="请输入邮箱/手机号码" id="txtName" class="al_Input dr_email" value="" name="data[email]" />
+									<input type="text" placeholder="请输入邮箱/手机号码" id="txtName" class="al_Input dr_email" name="userPhone" th:value="${phone}" />
 									<i id="tname"></i>
 								</div>
 								<!--手机end-->
 								<!--密码-->
 								<div style="margin-top:15px;" class="the_input" id="cssPwd">
 									<span class="password"></span>
-									<input type="password" placeholder="请输入密码" id="txtPwd" class="al_Input" value="" name="data[password]" />
+									<input type="password" placeholder="请输入密码" id="txtPwd" class="al_Input" name="userPwd" th:value="${password}" />
 									<i id="pwdd"></i>
 								</div>
 								<!--验证码-->
@@ -63,8 +64,8 @@
 								<!--其他选项-->
 								<div class="other_input">
 									<div class="left">
-										<input type="checkbox" name="remember" id="check" value="1" />
-										<label for="check">记住密码</label>
+										<input type="checkbox" name="rememberPassword" id="remember-me" value="true" />
+										<label for="remember-me" >记住密码</label>
 									</div>
 									<div class="right">
 										<a href="forget.html" class="forget">忘记密码</a>
@@ -75,7 +76,7 @@
 								<div class="other_input">
 									<div class="bt1 clearfix" id="login">
 										<span class="left">注册</span>
-										<span class="right focus">登录</span>
+										<span class="right focus" id="btn">登录</span>
 									</div>
 								</div>
 								<!--按钮end-->
@@ -109,38 +110,23 @@
 		</div>
 
 		<script type="text/javascript">
-			$(document).ready(function() {
-				$('#login span').eq(0).click(function() {
-					location.href = "reg.html"
-				});
-
-				$('#login span').eq(1).click(function() {
-					$('.ts_wrong').remove();
-					$('.the_input').removeClass('error');
-					if($('#txtName').val() == '') {
-						var notice = '<div class="ts_wrong"><span id="wrong">请输入邮箱/手机号码！</span></div>';
-						$('#txtName').parent().after(notice);
-						$('#txtName').parent().addClass('error');
-						return false;
+			$("#btn").click(function () {
+				$("#loginform").submit();
+			})
+			$.ajax({
+				type:"get",
+				url:"log",
+				success:function (data) {
+					// alert("niaho")
+					console.log(data.is)
+					if(data.is==1){
+						$("#remember-me").attr("checked","checked")
+					}else {
+						$("#remember-me").removeAttr("checked")
 					}
-
-					if($('#txtPwd').val() == '') {
-						var notice = '<div class="ts_wrong"><span id="wrong">请输入密码！</span></div>';
-						$('#txtPwd').parent().after(notice);
-						$('#txtPwd').parent().addClass('error');
-						return false;
-					}
-
-					$('form').submit();
-				});
-
-			});
-
-			$(document).keyup(function(event) {
-				if(event.keyCode == 13) {
-					$('#login span').eq(1).click();
 				}
 			});
+
 		</script>
 	</body>
 
