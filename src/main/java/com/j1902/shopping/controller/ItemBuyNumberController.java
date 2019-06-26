@@ -17,10 +17,12 @@ public class ItemBuyNumberController {
     @RequestMapping("/index")
     public String ItemBuyNumber(Map<String ,Object>map){
         List<Item> byBuyNumber = itemService.getByBuyNumber();
-        String number=null;
+        System.out.println("byBuyNumber = " + byBuyNumber);
+
         for (int i =0;i<8;i++){
-            number =i+"";
-            map.put(number,byBuyNumber.get(i).getItemImg2());
+            System.out.println("哈哈哈："+byBuyNumber.get(i).getItemImg2());
+           String img="img"+i;
+            map.put(img,byBuyNumber.get(i));
         }
         return  "front/index";
     }

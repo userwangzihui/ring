@@ -4,6 +4,7 @@ import com.j1902.shopping.pojo.Item;
 import com.j1902.shopping.service.AddItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,33 +27,38 @@ public class AddItemController {
         //保存到服务器中的文件名
         String systemFileName = null;
         //服务器文件保存的位置
-        String systemUploadLocation = "http://localhost:8080/upload";
+        String systemUploadLocation = "G:/upload/";
 
-        //当上传的文件不为空时
+//        //当上传的文件不为空时
+//        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+//        //上传文件名
+//        String filename = UUID.randomUUID() + suffix;
+
+
         if(!file.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = systemFileName + "-" + file.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file.getOriginalFilename();
             //上传文件
             file.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg1(systemFileName);
         }
         if(!file1.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = systemFileName + "-" + file1.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file1.getOriginalFilename();
             //上传文件
             file1.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg2(systemFileName);
         }
         if(!file2.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = systemFileName + "-" + file2.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file2.getOriginalFilename();
             //上传文件
             file2.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg3(systemFileName);
         }
         if(!file3.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = systemFileName + "-" + file3.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file3.getOriginalFilename();
             //上传文件
             file3.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg4(systemFileName);

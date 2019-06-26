@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 //WebMvcConfiguration === WebMvcConfigurationSupport
 @SpringBootConfiguration
 @MapperScan("com.j1902.shopping.mapper")
-
 public class SpringMvcConfig extends WebMvcConfigurationSupport {
 //    @Override
 //    public void configurePathMatch(PathMatchConfigurer configurer) {
@@ -34,6 +33,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     }
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:G:/upload/");
         registry.addResourceHandler("/templates/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/templates/");
         super.addResourceHandlers(registry);
     }
