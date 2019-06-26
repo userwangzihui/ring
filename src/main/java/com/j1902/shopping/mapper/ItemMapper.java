@@ -21,7 +21,7 @@ public interface ItemMapper {
 
     List<Item> selectByExample(ItemExample example);
 
-    List<Item> getByBuyNumber(Integer itmeBuynumber);
+    List<Item> getByBuyNumber();
 
     Item selectByPrimaryKey(Integer itemId);
 

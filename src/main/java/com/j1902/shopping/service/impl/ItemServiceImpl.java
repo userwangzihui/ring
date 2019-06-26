@@ -20,9 +20,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> getByBuyNumber() {
-        ItemExample itemExample = new ItemExample();
-        itemExample.setOrderByClause("itme_buynumber");
-        List<Item> items = itemMapper.selectByExample(itemExample);
+        List<Item> items = itemMapper.getByBuyNumber();
         return items;
     }
 }

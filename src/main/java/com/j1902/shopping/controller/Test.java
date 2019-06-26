@@ -68,4 +68,13 @@ public class Test {
 
 
 
+
+    @RequestMapping("/forget")
+    public String forget(){
+        return "front/forget";
+    }
+    @RequestMapping("/frontLogin")
+    public String frontLogin(){
+        return "front/login";
+    }
 }
