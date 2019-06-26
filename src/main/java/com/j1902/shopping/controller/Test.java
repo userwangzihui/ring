@@ -52,5 +52,12 @@ public class Test {
     public String goodsAdd(){
         return "back/goods_add";
    }
-
+    @RequestMapping("/forget")
+    public String forget(){
+        return "front/forget";
+    }
+    @RequestMapping("/frontLogin")
+    public String frontLogin(){
+        return "front/login";
+    }
 }
