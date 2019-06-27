@@ -673,6 +673,76 @@ public class CartExample {
             addCriterion("cart_item_price not between", value1, value2, "cartItemPrice");
             return (Criteria) this;
         }
+
+        public Criteria andCartItemImgIsNull() {
+            addCriterion("cart_item_img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgIsNotNull() {
+            addCriterion("cart_item_img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgEqualTo(String value) {
+            addCriterion("cart_item_img =", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgNotEqualTo(String value) {
+            addCriterion("cart_item_img <>", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgGreaterThan(String value) {
+            addCriterion("cart_item_img >", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgGreaterThanOrEqualTo(String value) {
+            addCriterion("cart_item_img >=", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgLessThan(String value) {
+            addCriterion("cart_item_img <", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgLessThanOrEqualTo(String value) {
+            addCriterion("cart_item_img <=", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgLike(String value) {
+            addCriterion("cart_item_img like", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgNotLike(String value) {
+            addCriterion("cart_item_img not like", value, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgIn(List<String> values) {
+            addCriterion("cart_item_img in", values, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgNotIn(List<String> values) {
+            addCriterion("cart_item_img not in", values, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgBetween(String value1, String value2) {
+            addCriterion("cart_item_img between", value1, value2, "cartItemImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartItemImgNotBetween(String value1, String value2) {
+            addCriterion("cart_item_img not between", value1, value2, "cartItemImg");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

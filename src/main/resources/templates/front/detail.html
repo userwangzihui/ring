@@ -1,4 +1,4 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+﻿<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="hb-loaded">
 
 	<head>
 		<title>钻戒详情</title>
@@ -216,13 +216,13 @@
 
 									});
 								</script>
-								<!--购买页中间的左边图片-->
+								<!--购买页中间的左边图片8888-->
 								<div class="buycort_left fl">
 									<ul class="bc_left">
-										<li class="li_border"> <img src="../../static/images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-										<li> <img src="../../static/images/20150121105910277b929564.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-										<li> <img src="../../static/images/2015012018513052f4cdec56.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-										<li> <img src="../../static/images/2015012018513031daa9bed7.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+										<li class="li_border"> <img th:src="${item.itemImg1}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+										<li> <img th:src="${item.itemImg2}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+										<li> <img th:src="${item.itemImg3}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+										<li> <img th:src="${item.itemImg4}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
 									</ul>
 									<!--上下按钮-->
 									<div class="top"></div>
@@ -232,14 +232,14 @@
 								<!--购买页中间的中间图片-->
 								<div class="buycort_center fl">
 									<ul class="ul_center">
-										<li id="magnifier2083" style="display: list-item;"> <img src="../../static/images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> <span style="position: absolute; left: 248px; top: 248px; display: none; width: 150px; height: 150px; background: rgb(153, 153, 153) none repeat scroll 0% 0%; border: 1px solid rgb(0, 0, 0); cursor: move; opacity: 0.4;"></span>
+										<li id="magnifier2083" style="display: list-item;"> <img th:src="${item.itemImg1}" alt="锁住一生 LOCK套链 0.006 G-I" /> <span style="position: absolute; left: 248px; top: 248px; display: none; width: 150px; height: 150px; background: rgb(153, 153, 153) none repeat scroll 0% 0%; border: 1px solid rgb(0, 0, 0); cursor: move; opacity: 0.4;"></span>
 											<div style="position: absolute; overflow: hidden; width: 300px; height: 300px; top: 0px; right: -385px; border: 1px solid rgb(204, 204, 204); z-index: 99998; display: none;">
-												<img src="../../static/images/2015012110590914b2fee4b2.jpg" style="position: absolute; left: -498px; top: -498px; width: 800px; height: 800px;" />
+												<img th:src="${item.itemImg1}" style="position: absolute; left: -498px; top: -498px; width: 800px; height: 800px;" />
 											</div>
 										</li>
-										<li id="magnifier2084"> <img src="../../static/images/20150121105910277b929564.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-										<li id="magnifier2085"> <img src="../../static/images/2015012018513052f4cdec56.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-										<li id="magnifier2086"> <img src="../../static/images/2015012018513031daa9bed7.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+										<li id="magnifier2084"> <img th:src="${item.itemImg2}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+										<li id="magnifier2085"> <img th:src="${item.itemImg3}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+										<li id="magnifier2086"> <img th:src="${item.itemImg4}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
 									</ul>
 									<div class="kzyl"></div>
 									<!--右按钮-->
@@ -266,18 +266,18 @@
 								<div class="buycort_right fr">
 									<!--钻戒-->
 									<div class="byright_top">
-										<p>锁住一生 LOCK套链[N04001205]</p>
-										<p> <span>&yen;5,920</span> </p>
+										<p th:text="${item.itemName}"></p>
+										<p> <span th:text="'&yen'+${item.itemPrice}"></span> </p>
 										<div class="byright_top-xq">
-											<i>最近售出：135</i>
-											<i>用户评论：6</i>
+											<i th:text="'销售量：'+${item.itmeBuynumber}"></i>
+											<i th:text="用户评论：6"></i>
 										</div>
 									</div>
 									<!--钻戒end-->
 									<!--参数-->
 									<div class="pho_cs" id="ctl00_content_zbDiv">
-										<p> <span>尺寸：</span> <i>1*1cm</i> </p>
-										<p id="ctl00_content_zDiamondDiv"> <span>钻石：</span> <i>主钻45颗</i> </p>
+										<p> <span>尺寸：</span> <i th:text="${item.itemSize}"></i> </p>
+										<p id="ctl00_content_zDiamondDiv"> <span>钻石：</span> <i th:text="${item.itemHeight}"></i> </p>
 									</div>
 									<!--参数end-->
 									<!--选择材质刻字等-->
@@ -285,12 +285,23 @@
 										<!--第一行-->
 										<div id="materialDiv" class="thr_first">
 											<span>材质：</span>
-											<i value="5920.00" class="iborder">18K白金</i>
+											<i value="5920.00" class="iborder" th:text="${item.itemType}"></i>
 										</div>
 										<!--第二行-->
 										<div class="thr_secound">
 											<span>数量：</span>
-											<select> <option>1</option> </select>
+											<select id="nb1">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+												<option>7</option>
+												<option>8</option>
+												<option>9</option>
+												<option>10</option>
+											</select>
 										</div>
 									</div>
 									<!--选择材质刻字等end-->
@@ -298,10 +309,12 @@
 									<!--购买选项-->
 									<div id="addCa" class="button buy_button">
 										<div title="购买darry ring钻戒" class="bt1">
-											<span>加入购物车</span>
+											<input id="it2" type="hidden" th:value="${item.itemId}">
+											<a id="a2" th:href="@{'/card?id='+${item.itemId}+'&number=1'}"><span>加入购物车</span></a>
 										</div>
 										<div title="把darry ring加入购物车" class="bt2">
-											<span>立即购买</span>
+											<input id="it1" type="hidden" th:value="${item.itemId}">
+											<a id="a1" th:href="@{'/pag?id='+${item.itemId}+'&number=1'}" ><span id="gm">立即购买</span></a>
 										</div>
 									</div>
 								</div>
@@ -369,16 +382,16 @@
 											<tbody>
 												<tr>
 													<td class="border_cs-td1">款式信息</td>
-													<td class="border_cs-td2"> <span>产品编号：</span> <em>N04001205</em> </td>
+													<td class="border_cs-td2"> <span>产品编号：</span> <em th:text="${item.itemId}" id="em"></em> </td>
 													<td class="border_cs-td3"> <span>证书类型：</span> <em>国检</em> </td>
-													<td class="border_cs-td5"> <span>材 质：</span> <em>18K白金</em> </td>
+													<td class="border_cs-td5"> <span>材 质：</span> <em th:text="${item.itemType}"></em> </td>
 													<td class="border_cs-td6">&nbsp;</td>
 												</tr>
 												<tr>
 													<td class="border_cs-td1">钻石信息</td>
-													<td class="border_cs-td2"> <span>总钻重量：</span> <em>0.27克拉</em> </td>
-													<td class="border_cs-td3"> <span>单钻重量：</span> <em>0.006克拉</em> </td>
-													<td class="border_cs-td4"> <span>钻石数量：</span> <em>45</em> </td>
+													<td class="border_cs-td2"> <span th:text="${item.itmeInfo}"></span> </td>
+
+													<td class="border_cs-td4"> <span>钻石重量：</span> <em th:text="${item.itemHeight}"></em> </td>
 												</tr>
 												<tr>
 													<td class="border_cs-td1"></td>
@@ -648,7 +661,7 @@
 													<p class="answer"> <i></i> <span> </span></p>
 													<p> <span style="margin-top:8px;">A：戴瑞目前开通电商平台有：亚马逊、京东、天猫、一号店等电商平台？</span></p>
 													<p>&nbsp; </p>
-													<p> <span style="margin-top:8px;"><a href="http://darryring.tmall.com/?spm=a220o.1000855.1997427721.d4918089.bGtU16"><img width="201" height="85" src="../../static/images/20150707101641f9d958efff.jpg" alt="" /></a>&nbsp;<a href="http://search.jd.com/search?keyword=%E7%8F%A0%E5%AE%9D&amp;enc=utf-8&amp;qrst=1&amp;ps=addr&amp;rt=1&amp;stop=1&amp;ev=exbrand_DR%20darryring%40&amp;uc=0"><img width="201" height="85" src="../../static/images/2015070710170180545692fd.jpg" alt="" /></a>&nbsp;<a href="http://list.yhd.com/c0-0-0/b969402-30038/a-s1-v4-p1-price-d0-f0-m1-rt0-pid-mid0-k%E7%8F%A0%E5%AE%9D/"><img width="201" height="85" src="../../static/20150707101722a3e63ffc72.jpg" alt="" /></a></span></p>
+													<p> <span style="margin-top:8px;"><a href="http://darryring.tmall.com/?spm=a220o.1000855.1997427721.d4918089.bGtU16"><img width="201" height="85" src="../../static/images/20150707101641f9d958efff.jpg" /></a>&nbsp;<a href="http://search.jd.com/search?keyword=%E7%8F%A0%E5%AE%9D&amp;enc=utf-8&amp;qrst=1&amp;ps=addr&amp;rt=1&amp;stop=1&amp;ev=exbrand_DR%20darryring%40&amp;uc=0"><img width="201" height="85" src="../../static/images/2015070710170180545692fd.jpg" alt="" /></a>&nbsp;<a href="http://list.yhd.com/c0-0-0/b969402-30038/a-s1-v4-p1-price-d0-f0-m1-rt0-pid-mid0-k%E7%8F%A0%E5%AE%9D/"><img width="201" height="85" src="../../static/images/20150707101722a3e63ffc72.jpg" alt="" /></a></span></p>
 													<p></p>
 												</div>
 												<!--每一条评论左边end-->
@@ -662,8 +675,7 @@
 													</p>
 													<p></p>
 												</div>
-												<!--每一条评论左边end-->images/20150707101711e7690bde7f.jpg" alt="" /></a>&nbsp;<a href="http://www.amazon.cn/s/ref=sr_nr_i_0?fst=as%3Aoff&amp;rh=k%3ADarry+Ring%2Ci%3Ajewelry&amp;keywords=Darry+Ring&amp;ie=UTF8&amp;qid=1436234715"><img width="201" height="85" src="../../static/images/
-											</div>
+												<!--&lt;!&ndash;每一条评论左边end&ndash;&gt;images/20150707101711e7690bde7f.jpg" alt="" /></a>&nbsp;<a href="http://www.amazon.cn/s/ref=sr_nr_i_0?fst=as%3Aoff&amp;rh=k%3ADarry+Ring%2Ci%3Ajewelry&amp;keywords=Darry+Ring&amp;ie=UTF8&amp;qid=1436234715"><img width="201" height="85" src="../../static/images/>-->
 											<div class="every_talk">
 												<!--每一条评论左边-->
 												<div class="question_left fl">
@@ -904,118 +916,123 @@
 							String.prototype.replaceAll = function(s1, s2) {
 								return this.replace(new RegExp(s1, "gm"), s2);
 							}
-							$(function() {
-								$('#addCa').click(function() {
-									var manHand = $("#ctl00_content_ddlManHandsize").val();
-									var womanHand = $("#ctl00_content_ddlWomanHandsize").val();
-									if (manHand == -1 || womanHand == -1) {
-										alert("请选择手寸。");
-										return;
-									}
-									if ($(".thr_first .iborder").text() == null || $(".thr_first .iborder").text() == "") {
-										alert("请选择材质");
-										return;
-									}
-									if ($("#manFont").length > 0) {
-										var mfontlen = strlength($("#manFont").val());
-										if (mfontlen > 10) {
-											alert("男戒刻字数超过了10个字符。");
-										}
-									}
-									if ($("#womanFont").length > 0) {
-										var wfontlen = strlength($("#womanFont").val());
-										if (wfontlen > 10) {
-											alert("女戒刻字数超过了10个字符。");
-										}
-									}
-									if ($("#ipt_font").length > 0) {
+							// $(function() {
+							// 	$('#addCa').click(function() {
+							// 		var manHand = $("#ctl00_content_ddlManHandsize").val();
+							// 		var womanHand = $("#ctl00_content_ddlWomanHandsize").val();
+							// 		if (manHand == -1 || womanHand == -1) {
+							// 			alert("请选择手寸。");
+							// 			return;
+							// 		}
+							// 		if ($(".thr_first .iborder").text() == null || $(".thr_first .iborder").text() == "") {
+							// 			alert("请选择材质");
+							// 			return;
+							// 		}
+							// 		if ($("#manFont").length > 0) {
+							// 			var mfontlen = strlength($("#manFont").val());
+							// 			if (mfontlen > 10) {
+							// 				alert("男戒刻字数超过了10个字符。");
+							// 			}
+							// 		}
+							// 		if ($("#womanFont").length > 0) {
+							// 			var wfontlen = strlength($("#womanFont").val());
+							// 			if (wfontlen > 10) {
+							// 				alert("女戒刻字数超过了10个字符。");
+							// 			}
+							// 		}
+							// 		if ($("#ipt_font").length > 0) {
+							//
+							// 			if ($("#ctl00_content_ddlHandSize").val() == -1) {
+							// 				alert("请选择手寸。");
+							// 				return;
+							// 			}
+							//
+							// 		}
+							// 		//判断是否登录
+							// 		if ('false' == "true") {
+							// 			$.get("/API/DarryringYzAPI.ashx", {
+							// 				action: 'darryhome'
+							// 			}, function(data) {
+							// 				var json = $.parseJSON(data);
+							// 				if (json.Status == "true") {
+							//
+							// 					$(".yz_password").hide();
+							// 					addCartFun();
+							// 					return false;
+							// 				} else if (json.MsgCode == "NoPay") {
+							// 					$(".notCart").hide();
+							// 					$(".haveDarry").hide();
+							// 					$(".wgm").hide();
+							// 					$('.yz_password').show();
+							// 					$('.backall').show();
+							// 					$("#noPayOrder").show();
+							// 					$("#noPay").text(json.Name);
+							// 					return false;
+							// 				} else {
+							//
+							// 					//未购买
+							// 					//判断购物车中是否存在Darry钻戒
+							// 					$.get("/API/DarryringYzAPI.ashx", {
+							// 						action: 'cart'
+							// 					}, function(dat) {
+							// 						//购物车中不存在Darry钻戒
+							//
+							// 						if (dat == "false") {
+							//
+							// 							$(".notCart").hide();
+							// 							$(".haveDarry").hide();
+							// 							$(".wgm").show();
+							// 							$('.yz_password').show();
+							// 							$('.backall').show();
+							//
+							// 							return false;
+							// 						} else {
+							// 							$(".yz_password").hide();
+							// 							addCartFun();
+							// 						}
+							// 					});
+							// 				}
+							// 			});
+							//
+							// 		} else {
+							// 			//未登录
+							// 			$(".wdl").show();
+							// 			$('.yz_password').show();
+							// 			$('.backall').show();
+							//
+							// 		}
+							// 	});
+							// 	$("#btnBuy").click(function() {
+							// 		addCartFun();
+							// 		$(".yz_password").hide();
+							// 		$(".wdl").hide();
+							// 		$(".carthave").hide();
+							// 		$('.yz_password').hide();
+							// 		$(".toyz_nobuy").hide();
+							// 		$('.backall').hide();
+							// 		$(".wgm").hide();
+							// 		$(".notCart").hide();
+							// 	});
+							// 	$("#btnbuy2").click(function() {
+							// 		addCartFun();
+							// 	});
+							// 	$('.yz_close').click(function() {
+							// 		$(".yz_password").hide();
+							// 		$(".wdl").hide();
+							// 		$(".carthave").hide();
+							// 		$('.yz_password').hide();
+							// 		$(".toyz_nobuy").hide();
+							// 		$('.backall').hide();
+							// 		$(".wgm").hide();
+							// 		$(".notCart").hide();
+							// 	});
+							//
+							// });
+							// $("#gm").click(function () {
+							// 	var formdata=$("#em").val()
+							// 	alert(formdata)
+							// })
 
-										if ($("#ctl00_content_ddlHandSize").val() == -1) {
-											alert("请选择手寸。");
-											return;
-										}
-
-									}
-									//判断是否登录
-									if ('false' == "true") {
-										$.get("/API/DarryringYzAPI.ashx", {
-											action: 'darryhome'
-										}, function(data) {
-											var json = $.parseJSON(data);
-											if (json.Status == "true") {
-
-												$(".yz_password").hide();
-												addCartFun();
-												return false;
-											} else if (json.MsgCode == "NoPay") {
-												$(".notCart").hide();
-												$(".haveDarry").hide();
-												$(".wgm").hide();
-												$('.yz_password').show();
-												$('.backall').show();
-												$("#noPayOrder").show();
-												$("#noPay").text(json.Name);
-												return false;
-											} else {
-
-												//未购买
-												//判断购物车中是否存在Darry钻戒
-												$.get("/API/DarryringYzAPI.ashx", {
-													action: 'cart'
-												}, function(dat) {
-													//购物车中不存在Darry钻戒
-
-													if (dat == "false") {
-
-														$(".notCart").hide();
-														$(".haveDarry").hide();
-														$(".wgm").show();
-														$('.yz_password').show();
-														$('.backall').show();
-
-														return false;
-													} else {
-														$(".yz_password").hide();
-														addCartFun();
-													}
-												});
-											}
-										});
-
-									} else {
-										//未登录
-										$(".wdl").show();
-										$('.yz_password').show();
-										$('.backall').show();
-
-									}
-								});
-								$("#btnBuy").click(function() {
-									addCartFun();
-									$(".yz_password").hide();
-									$(".wdl").hide();
-									$(".carthave").hide();
-									$('.yz_password').hide();
-									$(".toyz_nobuy").hide();
-									$('.backall').hide();
-									$(".wgm").hide();
-									$(".notCart").hide();
-								});
-								$("#btnbuy2").click(function() {
-									addCartFun();
-								});
-								$('.yz_close').click(function() {
-									$(".yz_password").hide();
-									$(".wdl").hide();
-									$(".carthave").hide();
-									$('.yz_password').hide();
-									$(".toyz_nobuy").hide();
-									$('.backall').hide();
-									$(".wgm").hide();
-									$(".notCart").hide();
-								});
-
-							});
 						</script>
 					</div>
 				</div>
@@ -1403,6 +1420,17 @@
 						$("#masks").fadeOut("slow");
 						$("#mask").fadeOut("slow");
 					}
+					$("#nb1").change(function () {
+						var st = $("#nb1").val()
+						var name =  $("#it1").val();
+						$("#a1").attr("href","/pag?id="+name+"&number="+st);
+					})
+
+					$("#nb1").change(function () {
+						var st=$("#nb1").val()
+						var name=$("#it2").val();
+						$("#a2").attr("href","/card?id="+name+"&number="+st)
+					})
 				</script>
 
 	</body>

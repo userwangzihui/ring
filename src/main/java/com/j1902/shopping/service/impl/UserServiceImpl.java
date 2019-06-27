@@ -74,4 +74,13 @@ public class UserServiceImpl implements UserService {
         cookie.setMaxAge(60 * 60);
         response.addCookie(cookie);
     }
+
+    @Override
+    public List<User> getByPhone(User user) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.or();
+        criteria.andUserPhoneEqualTo(user.getUserPhone());
+        List<User> users = userMapper.selectByExample(userExample);
+        return users;
+    }
 }

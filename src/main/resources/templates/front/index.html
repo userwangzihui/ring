@@ -217,7 +217,7 @@
 						<p> 7月15日 正午12点浪漫发售</p>
 						<div class="to_more">
 							<div class="bt2">
-								<a target="_blank" href="TrueLove.html">了解更多</a>
+								<a target="_blank" href="/getItemAll">了解更多</a>
 							</div>
 						</div>
 					</div>
@@ -274,7 +274,7 @@
 						<p> 将我们的誓言印刻在永恒的钻石上，散发最闪耀的光芒</p>
 						<div class="to_more">
 							<div class="bt2">
-								<a target="_blank" href="TrueLove.html">了解更多</a>
+								<a target="_blank" href="/getItemAll">了解更多</a>
 							</div>
 						</div>
 					</div>
@@ -284,16 +284,16 @@
 			<!--tab选项卡下的内容  end-->
 			<!--推荐款式-->
 			<div class="hot-ks">
-				<a class="fr" target="_blank" href="TrueLove.html">更多</a>
-				<span class="other_color" id="renqi"><i>人气最高</i><em></em> </span>
-				<span id="rxph"><i>热销商品</i><em></em> </span>
+				<a class="fr" target="_blank" href="/getItemAll">更多</a>
+				<a href="/ItemPrice"><span class="other_color" id="renqi"><i>人气最高</i><em></em> </span></a>
+				<a href="/index"><span id="rxph"><i>热销商品</i><em></em> </span></a>
 			</div>
 			<!--购买的款式-->
 			<div class="cmain">
 				<ul id="ullist" class="buyit">
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img0.itemId}}" rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<!--<img width="236px" height="236px" alt="Forever系列 " src="../../static/images/2014090119350717386d7a1e.jpg" />-->
 								<img width="236px" height="236px" alt="Forever系列 " th:src="${img0.itemImg2}" />
@@ -306,13 +306,14 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html" th:text="${img0.itemSeries}"></a><span th:text="${img0.itemType}"></span> </p>
-							<p>  <span th:text="￥"></span><span  th:text="${img0.itemPrice}"></span><i th:text="销量："></i><i th:text="${img0.itmeBuynumber}"></i></p>
+							<p><a target="_blank" href="/cart" th:text="${img0.itemSeries}+${img0.itemType}"></a> </p>
+							<p>  <span th:text="'￥'+${img0.itemPrice}"></span><i th:text="'销量：'+${img0.itmeBuynumber}"></i></p>
 						</div>
 					</li>
+
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img1.itemId}}" rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<img width="236px" height="236px" th:alt="${img1.itemSeries}+${img1.itemType}" th:src="${img1.itemImg2}" />
 
@@ -324,13 +325,13 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html">Forever系列 经典款&nbsp;40分&nbsp;D色</a></p>
-							<p> <span>￥15,800</span><i>销量：2413</i></p>
+							<p><a target="_blank" href="/cart" th:text="${img1.itemSeries}+${img1.itemType}"></a></p>
+							<p> <span th:text="'￥'+${img1.itemPrice}"></span><i th:text="'销量：'+${img1.itmeBuynumber}"></i></p>
 						</div>
 					</li>
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img2.itemId}}" rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<img width="236px" height="236px" alt="True Love系列 简奢款&nbsp;30分&nbsp;E色" th:src="${img2.itemImg2}" />
 
@@ -342,13 +343,13 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html">True Love系列 简奢款&nbsp;30分&nbsp;E色</a></p>
-							<p> <span>￥11,000</span><i>销量：1235</i></p>
+							<p><a target="_blank" href="detail.html" th:text="${img2.itemSeries}+${img2.itemType}"></a></p>
+							<p><span th:text="'￥'+${img2.itemPrice}"></span><i th:text="'销量：'+${img2.itmeBuynumber}"></i></p>
 						</div>
 					</li>
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img3.itemId}}" rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<img width="236px" height="236px" alt="True Love系列 典雅&nbsp;40分&nbsp;F色" th:src="${img3.itemImg2}" />
 
@@ -360,13 +361,13 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html">True Love系列 典雅&nbsp;40分&nbsp;F色</a></p>
-							<p> <span>￥19,150</span><i>销量：2654</i></p>
+							<p><a target="_blank" href="detail.html" th:text="${img3.itemSeries}+${img3.itemType}"></a></p>
+							<p> <span th:text="'￥'+${img3.itemPrice}"></span><i th:text="'销量：'+${img3.itmeBuynumber}"></i></p>
 						</div>
 					</li>
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img4.itemId}}" rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<img width="236px" height="236px" alt="True Love系列 典雅&nbsp;40分&nbsp;F色"  th:src="${img4.itemImg2}" />
 
@@ -378,13 +379,13 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html">True Love系列 典雅&nbsp;40分&nbsp;F色</a></p>
-							<p> <span>￥19,150</span><i>销量：2654</i></p>
+							<p><a target="_blank" href="detail.html" th:text="${img4.itemSeries}+${img4.itemType}"></a></p>
+							<p> <span th:text="'￥'+${img4.itemPrice}"></span><i th:text="'销量：'+${img4.itmeBuynumber}"></i></p>
 						</div>
 					</li>
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img5.itemId}}" rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<img width="236px" height="236px" alt="True Love系列 典雅&nbsp;40分&nbsp;F色"  th:src="${img5.itemImg2}" />
 
@@ -395,13 +396,13 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html">True Love系列 典雅&nbsp;40分&nbsp;F色</a></p>
-							<p> <span>￥19,150</span><i>销量：2654</i></p>
+							<p><a target="_blank" href="detail.html" th:text="${img5.itemSeries}+${img5.itemType}"></a></p>
+							<p> <span th:text="'￥'+${img5.itemPrice}"></span><i th:text="'销量：'+${img5.itmeBuynumber}"></i></p>
 						</div>
 					</li>
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img6.itemId}}"rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<img width="236px" height="236px" alt="True Love系列 典雅&nbsp;40分&nbsp;F色"  th:src="${img6.itemImg2}" />
 							</div>
@@ -411,13 +412,13 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html">True Love系列 典雅&nbsp;40分&nbsp;F色</a></p>
-							<p> <span>￥19,150</span><i>销量：2654</i></p>
+							<p><a target="_blank" href="detail.html" th:text="${img6.itemSeries}+${img6.itemType}"></a></p>
+							<p> <span th:text="'￥'+${img6.itemPrice}"></span><i th:text="'销量：'+${img6.itmeBuynumber}"></i></p>
 						</div>
 					</li>
 					<li>
 						<div class="by_top">
-							<a target="_blank" href="detail.html" rel="nofollow"></a>
+							<a target="_blank" th:href="@{'detail?id='+${img7.itemId}}" rel="nofollow"></a>
 							<div style="opacity:1" class="bything-one">
 								<img width="236px" height="236px" alt="True Love系列 典雅&nbsp;40分&nbsp;F色"  th:src="${img7.itemImg2}" />
 							</div>
@@ -427,8 +428,8 @@
 						</div>
 						<div class="by_center"></div>
 						<div class="by_bottom">
-							<p><a target="_blank" href="detail.html">True Love系列 典雅&nbsp;40分&nbsp;F色</a></p>
-							<p> <span>￥19,150</span><i>销量：2654</i></p>
+							<p><a target="_blank" href="detail.html" th:text="${img7.itemSeries}+${img7.itemType}"></a></p>
+							<p> <span th:text="'￥'+${img7.itemPrice}"></span><i th:text="'销量：'+${img7.itmeBuynumber}"></i></p>
 						</div>
 					</li>
 				</ul>

@@ -19,6 +19,8 @@ public class Cart {
 
     private Double cartItemPrice;
 
+    private String cartItemImg;
+
     public Integer getCartId() {
         return cartId;
     }
@@ -89,5 +91,13 @@ public class Cart {
 
     public void setCartItemPrice(Double cartItemPrice) {
         this.cartItemPrice = cartItemPrice;
+    }
+
+    public String getCartItemImg() {
+        return cartItemImg;
+    }
+
+    public void setCartItemImg(String cartItemImg) {
+        this.cartItemImg = cartItemImg == null ? null : cartItemImg.trim();
     }
 }

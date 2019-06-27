@@ -59,6 +59,12 @@ spring:
 
 mybatis:
   mapper-locations: "classpath:mapper/*Mapper.xml"
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
 #pagehelper:
 #    # dialect: ①
 #    # 分页插件会自动检测当前的数据库链接，自动选择合适的分页方式（可以不设置）

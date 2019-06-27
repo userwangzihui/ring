@@ -4,7 +4,9 @@ import com.j1902.shopping.pojo.Cart;
 import com.j1902.shopping.pojo.CartExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CartMapper {
     long countByExample(CartExample example);
 
@@ -17,6 +19,7 @@ public interface CartMapper {
     int insertSelective(Cart record);
 
     List<Cart> selectByExample(CartExample example);
+     long  countByUserId(Integer userId);
 
     Cart selectByPrimaryKey(Integer cartId);
 

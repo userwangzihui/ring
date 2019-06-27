@@ -14,7 +14,6 @@ public interface ItemMapper {
 
     int deleteByPrimaryKey(Integer itemId);
 
-
     int insert(Item record);
 
     int insertSelective(Item record);
@@ -22,6 +21,7 @@ public interface ItemMapper {
     List<Item> selectByExample(ItemExample example);
 
     List<Item> getByBuyNumber();
+    List<Item> getByPrice();
 
     Item selectByPrimaryKey(Integer itemId);
 

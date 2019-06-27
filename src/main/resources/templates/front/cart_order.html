@@ -200,8 +200,8 @@
 								<!--地址-->
 								<div class="shop_adress-top">
 									<input type="radio" checked="checked" name="adress" value="61921" />
-									<label>福建省龙岩市长汀县娃娃亲到青岛</label>
-									<label> 张合(收) 13851435593</label>
+									<label th:text="${session.USER_LOGIN.userAddress}"></label>
+									<label th:text="${session.USER_LOGIN.userName}+'(收)'+${session.USER_LOGIN.userPhone}"> </label>
 									<span>默认地址</span>
 									<a href="javascript:showAddress(61921);">修改</a>
 									<i>|</i>
@@ -258,12 +258,12 @@
 												<td class="shop_adress-kz">数量</td>
 												<td class="shop_adress-pirce">价 格</td>
 											</tr>
-											<tr class="shop_adressqr-sec">
-												<td class="shop_adress-shoop">Forever系列 经典款</td>
-												<td class="shop_adress-cz">18K白金</td>
-												<td class="shop_adress-sc">7</td>
-												<td class="shop_adress-kz">1</td>
-												<td class="shop_adress-pirce"><span style="font-family:微软雅黑">￥10,800</span></td>
+											<tr class="shop_adressqr-sec" th:each="items :${item}">
+												<td class="shop_adress-shoop" th:text="${items.itemSeries}" ></td>
+												<td class="shop_adress-cz" th:text="${items.itemType}"></td>
+												<td class="shop_adress-sc"th:text="${items.itemSize}"></td>
+												<td class="shop_adress-kz"th:text="${items.number}"></td>
+												<td class="shop_adress-pirce"><span style="font-family:微软雅黑"th:text="'￥'+${items.itemPrice}"></span></td>
 											</tr>
 										</tbody>
 									</table>
@@ -274,10 +274,10 @@
 											<span>总计</span>
 										</div>
 										<div class="fr">
-											<i>1</i>
+											<i th:text="${count}"></i>
 											<span>件商品</span>
 											<span>应付金额：</span>
-											<i style="font-family:微软雅黑" class="fw_bold">￥10,800</i>
+											<i style="font-family:微软雅黑" class="fw_bold" th:text="'￥'+${price}"></i>
 										</div>
 									</div>
 									<!--总计-->

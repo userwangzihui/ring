@@ -376,6 +376,17 @@
     order by
     itme_buynumber
     desc
-
   </select>
+
+  <select id="getByPrice" parameterType="com.j1902.shopping.pojo.Item" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    item
+    order by
+    item_price
+    desc
+  </select>
+
+
 </mapper>

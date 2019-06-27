@@ -5,6 +5,7 @@ import com.j1902.shopping.pojo.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public interface UserService {
 
@@ -15,4 +16,5 @@ public interface UserService {
     public void deleteCookie(HttpServletRequest request, HttpServletResponse response);
 
     public void addCookie(String user, HttpServletResponse response) throws UnsupportedEncodingException;
+    public List<User> getByPhone(User user);
 }

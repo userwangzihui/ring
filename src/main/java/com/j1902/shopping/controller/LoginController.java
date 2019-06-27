@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,7 +23,7 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
-
+//前端登录
     @RequestMapping("/frontLogin")
     public String login(HttpServletRequest request, Map<String, Object> map, HttpServletResponse response) throws UnsupportedEncodingException {
         Cookie[] cookies = request.getCookies();
@@ -43,7 +45,7 @@ public class LoginController {
         }
         return "front/login";
     }
-
+//记住密码勾选框
     @RequestMapping("/log")
     @ResponseBody
     public Map<String, Object> log(HttpServletRequest request) {
@@ -65,7 +67,7 @@ public class LoginController {
     }
 
     @RequestMapping("/logins")
-    public String login(User user, HttpServletRequest request, HttpServletResponse response, Map<String, Object> map) throws UnsupportedEncodingException {
+    public String login(User user, HttpServletRequest request, HttpServletResponse response, Map<String, Object> map, HttpSession session) throws UnsupportedEncodingException {
         String userphone = request.getParameter("userphone");
         String rememberPassword = request.getParameter("rememberPassword");
         System.out.println("rememberPassword = " + rememberPassword);
@@ -76,13 +78,18 @@ public class LoginController {
             } else {
                 userService.deleteCookie(request, response);
             }
-            return "front/index";
+            List<User> users = userService.getByPhone(user);
+            session.setAttribute("USER_LOGIN",users.get(0));
+
+
+            return "redirect:index";
         } else if ("true".equals(rememberPassword)) {
             userService.addCookie(user.getUserPhone(), response);
             map.put("phone", user.getUserPhone());
             map.put("loginFail", "用户名与密码不匹配！");
             return "front/login";
         }
+
         map.put("phone", user.getUserPhone());
         map.put("loginFail", "用户名与密码不匹配！");
         return "front/login";
