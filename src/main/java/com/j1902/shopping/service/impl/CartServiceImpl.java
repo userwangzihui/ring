@@ -50,5 +50,10 @@ public class CartServiceImpl implements CartService {
         cartMapper.deleteByExample(null);
     }
 
+    @Override
+    public void deleteByCarId(Integer id) {
+        cartMapper.deleteByPrimaryKey(id);
+    }
+
 
 }

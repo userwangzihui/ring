@@ -87,7 +87,7 @@ public class UserCartController {
         return "redirect:pageCart";
 
     }
- //分页
+ //购物分页
     @RequestMapping("/pageCart")
     public String pageCart( Map<String,Object>map, HttpSession session,Integer currentPage){
         double prices=0;
@@ -117,7 +117,7 @@ public class UserCartController {
     public String removeCart(){
         System.out.println(1111);
         cartService.deleteCart();
-        return "front/cart";
+        return "redirect:pageCart";
     }
 
     @RequestMapping("/cartAgreement")
@@ -138,5 +138,11 @@ public class UserCartController {
         PageInfo<Cart> carts = cartService.getByCount(1, 3, user.getUserId());
         map.put("carts",carts);
         return "front/cart_order";
+    }
+    //删除单个购物记录
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer cid){
+        cartService.deleteByCarId(cid);
+        return "redirect:pageCart";
     }
 }
