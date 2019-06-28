@@ -18,12 +18,20 @@ public class ItemBuyNumberController {
     public String ItemBuyNumber(Map<String ,Object>map){
         List<Item> byBuyNumber = itemService.getByBuyNumber();
         System.out.println("byBuyNumber = " + byBuyNumber);
-
         for (int i =0;i<8;i++){
-            System.out.println("哈哈哈："+byBuyNumber.get(i).getItemImg2());
-           String img="img"+i;
+            String img="img"+i;
             map.put(img,byBuyNumber.get(i));
         }
         return  "front/index";
     }
+    @RequestMapping("/ItemPrice")
+    public String ItemPrice(Map<String ,Object>map){
+        List<Item> byBuyNumber = itemService.getByPrice();
+        for (int i =0;i<8;i++){
+            String img="img"+i;
+            map.put(img,byBuyNumber.get(i));
+        }
+        return  "front/index";
+    }
+
 }

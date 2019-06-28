@@ -4,7 +4,9 @@ import com.j1902.shopping.pojo.User;
 import com.j1902.shopping.pojo.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
     long countByExample(UserExample example);
 

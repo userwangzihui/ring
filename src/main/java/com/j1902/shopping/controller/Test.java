@@ -38,23 +38,19 @@ public class Test {
     @RequestMapping("/AdminLogin")
     public String L(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws UnsupportedEncodingException {
         Remember cookAdmin = adminService.showPwd(request);
-        System.out.println("好烦：" + cookAdmin);
         if (cookAdmin != null) {
-            System.out.println("方式1");
             session.setAttribute("adminName", cookAdmin.getAdminName());
             session.setAttribute("adminPwd", cookAdmin.getAdminPwd());
             session.setAttribute("adminRemember", cookAdmin.getRemember());
         } else {
-            System.out.println("方式2");
-            if (session.getAttribute("to") == null && session.getAttribute("one") == null) {
-                System.out.println("方式3");
+            if (session.getAttribute("to")== null&&session.getAttribute("one")==null) {
                 session.removeAttribute("adminName");
                 session.removeAttribute("adminPwd");
                 session.removeAttribute("adminRemember");
-            } else if (session.getAttribute("to") == null && session.getAttribute("one") != null) {
+            } else if (session.getAttribute("to")==null&&session.getAttribute("one")!=null){
                 session.removeAttribute("adminRemember");
                 session.removeAttribute("one");
-            } else {
+            }else {
                 session.removeAttribute("to");
                 session.removeAttribute("one");
             }
@@ -103,6 +99,11 @@ public class Test {
     }
 
 
+
+    @RequestMapping("/forget")
+    public String forget(){
+        return "front/forget";
+    }
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("ADMIN_LOGIN");
@@ -122,7 +123,6 @@ public class Test {
     @RequestMapping("/message")
     @ResponseBody
     public Integer getWaitOrder(){
-        System.out.println("来过");
         Map<String,Object> map = new HashMap<>();
         int i = orderService.selectWaitCountOrder();
         return i;

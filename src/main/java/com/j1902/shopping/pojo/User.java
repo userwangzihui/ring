@@ -92,4 +92,19 @@ public class User {
     public void setUserPwd(String userPwd) {
         this.userPwd = userPwd == null ? null : userPwd.trim();
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userRealname='" + userRealname + '\'' +
+                ", userSex='" + userSex + '\'' +
+                ", userBirthday=" + userBirthday +
+                ", userAddress='" + userAddress + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userImage='" + userImage + '\'' +
+                ", userPwd='" + userPwd + '\'' +
+                '}';
+    }
 }

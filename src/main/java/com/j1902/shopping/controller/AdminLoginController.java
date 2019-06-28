@@ -32,6 +32,7 @@ public class AdminLoginController {
             if ("on".equals(remember.getRemember())) {
                 adminService.rememberPwd(response, remember);
             } else {
+               ;
                 adminService.forgetPwd(request, response);
             }
             session.setAttribute("ADMIN_LOGIN", remember);
