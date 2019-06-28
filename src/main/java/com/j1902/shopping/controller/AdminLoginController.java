@@ -30,10 +30,8 @@ public class AdminLoginController {
         System.out.println("remember = " + remember);
         if (adminService.getByName(remember)) {
             if ("on".equals(remember.getRemember())) {
-                System.out.println("存执1111");
                 adminService.rememberPwd(response, remember);
             } else {
-                System.out.println("储值2222222");
                 adminService.forgetPwd(request, response);
             }
             session.setAttribute("ADMIN_LOGIN", remember);

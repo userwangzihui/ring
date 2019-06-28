@@ -14,7 +14,7 @@ public class ItemBuyNumberController {
     @Autowired
     ItemService itemService;
 
-    @RequestMapping("/index")
+        @RequestMapping("/index")
     public String ItemBuyNumber(Map<String ,Object>map){
         List<Item> byBuyNumber = itemService.getByBuyNumber();
         System.out.println("byBuyNumber = " + byBuyNumber);

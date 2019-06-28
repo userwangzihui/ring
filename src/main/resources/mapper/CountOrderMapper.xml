@@ -288,4 +288,25 @@
       count_address = #{countAddress,jdbcType=VARCHAR}
     where count_id = #{countId,jdbcType=INTEGER}
   </update>
+
+  <resultMap type="com.j1902.shopping.model.OrdersQv" id="countOrders">
+    <!-- property 表示com.mybatis.bean.StudentTemp中的属性； column 表示表中的列名 -->
+    <id property="countId" column="count_id" />
+    <result property="countUserid" column="count_userid" />
+
+    <!-- association字面意思关联，这里只专门做一对一关联； property表示是com.mybatis.bean.StudentTemp中的属性名称；
+        javaType表示该属性是什么类型对象 -->
+    <collection property="orderList" ofType="com.j1902.shopping.pojo.Order" select="com.j1902.shopping.mapper.OrderMapper.selectByCountId" column="count_id">
+    <id property="orderId" column="order_id"/>
+      <result property="orderItemname" column="order_itemname"/>
+    </collection>
+  </resultMap>
+  <select id="selectBySta" parameterType="java.lang.String" resultMap="countOrders">
+  select
+  <include refid="Base_Column_List"/>
+  from
+  count_order
+  where
+  count_sat = #{sta}
+  </select>
 </mapper>

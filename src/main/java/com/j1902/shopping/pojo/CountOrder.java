@@ -1,5 +1,7 @@
 package com.j1902.shopping.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class CountOrder {
@@ -9,6 +11,22 @@ public class CountOrder {
 
     private String countRemarks;
 
+    @Override
+    public String toString() {
+        return "CountOrder{" +
+                "countId=" + countId +
+                ", countUserid=" + countUserid +
+                ", countRemarks='" + countRemarks + '\'' +
+                ", countCreatetime=" + countCreatetime +
+                ", countMethod='" + countMethod + '\'' +
+                ", countMoney=" + countMoney +
+                ", countSat='" + countSat + '\'' +
+                ", countUsername='" + countUsername + '\'' +
+                ", countPhone='" + countPhone + '\'' +
+                ", countAddress='" + countAddress + '\'' +
+                '}';
+    }
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date countCreatetime;
 
     private String countMethod;

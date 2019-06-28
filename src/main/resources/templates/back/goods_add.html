@@ -70,7 +70,7 @@
 				<li class="green dropdown-modal">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-						<span class="badge badge-success">5</span>
+						<span class="badge badge-success" id="sp1"></span>
 					</a>
 
 					<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
@@ -80,7 +80,7 @@
 						</li>
 
 						<li class="dropdown-footer">
-							<a href="javascript:void(0)">
+							<a href="/dealWait">
 								未处理订单
 								<i class="ace-icon fa fa-arrow-right"></i>
 							</a>
@@ -93,7 +93,7 @@
 						<img class="nav-user-photo" src="../../static/assets/images/avatars/user.jpg" alt="Jason's Photo" />
 						<span class="user-info">
 									<small>Welcome</small>
-									Admin
+									<small th:text="${session.ADMIN_LOGIN.getAdminName()}"></small>
 								</span>
 
 						<i class="ace-icon fa fa-caret-down"></i>
@@ -101,7 +101,7 @@
 
 					<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 						<li>
-							<a href="#">
+							<a href="/logout">
 								<i class="ace-icon fa fa-power-off"></i>
 								Logout
 							</a>
@@ -166,7 +166,7 @@
 
 				<ul class="submenu">
 					<li class="">
-						<a href="goodorder_unfinished.htmls.html">
+						<a href="/order">
 							<i class="menu-icon fa fa-caret-right"></i>
 							查看商品
 						</a>
@@ -175,7 +175,7 @@
 					</li>
 
 					<li class="active">
-						<a href="goods_add.html">
+						<a href="/goodsAdd">
 							<i class="menu-icon fa fa-caret-right"></i>
 							添加商品
 						</a>
@@ -197,7 +197,7 @@
 
 				<ul class="submenu">
 					<li class="">
-						<a href="order.html">
+						<a href="/adminOrder">
 							<i class="menu-icon fa fa-caret-right"></i>
 							已处理订单
 						</a>
@@ -205,7 +205,7 @@
 						<b class="arrow"></b>
 					</li>
 					<li class="">
-						<a href="order_unfinished.html">
+						<a href="/adminOrder_unfinished">
 							<i class="menu-icon fa fa-caret-right"></i>
 							未处理订单
 						</a>
@@ -465,6 +465,11 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+	$.post("message",
+			function(data,status){
+				console.log("收到的是："+data+"--");
+				$("#sp1").text(data);
+			});
 	jQuery(function($) {
 		/***************/
 		$('.show-details-btn').on('click', function(e) {

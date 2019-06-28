@@ -241,4 +241,12 @@
       order_item_type = #{orderItemType,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
+  <select id="selectByCountId" resultType="com.j1902.shopping.pojo.Order" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    `order`
+    where
+    order_count_id = #{id};
+  </select>
 </mapper>

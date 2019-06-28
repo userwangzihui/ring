@@ -27,7 +27,7 @@ public class AddItemController {
         //保存到服务器中的文件名
         String systemFileName = null;
         //服务器文件保存的位置
-        String systemUploadLocation = "G:/upload/";
+        String systemUploadLocation = "D:";
 
 //        //当上传的文件不为空时
 //        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -37,28 +37,28 @@ public class AddItemController {
 
         if(!file.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/upload/"+systemFileName + "-" + file.getOriginalFilename();
+            systemFileName = "/f/"+systemFileName + "-" + file.getOriginalFilename();
             //上传文件
             file.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg1(systemFileName);
         }
         if(!file1.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/upload/"+systemFileName + "-" + file1.getOriginalFilename();
+            systemFileName = "/f/"+systemFileName + "-" + file1.getOriginalFilename();
             //上传文件
             file1.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg2(systemFileName);
         }
         if(!file2.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/upload/"+systemFileName + "-" + file2.getOriginalFilename();
+            systemFileName = "/f/"+systemFileName + "-" + file2.getOriginalFilename();
             //上传文件
             file2.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg3(systemFileName);
         }
         if(!file3.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/upload/"+systemFileName + "-" + file3.getOriginalFilename();
+            systemFileName = "/f/"+systemFileName + "-" + file3.getOriginalFilename();
             //上传文件
             file3.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg4(systemFileName);
@@ -67,4 +67,15 @@ public class AddItemController {
         addItemService.addItem(item);
         return "back/goods";
     }
+    @RequestMapping("/deleteItem")
+    public String deleteItem(Integer itemId){
+        addItemService.deleteItem(itemId);
+        return  "redirect:order";
+    }
+    @RequestMapping("/updateItem")
+    public String deleteItem(Item item){
+        addItemService.updateItem(item);
+        return  "redirect:order";
+    }
+
 }
