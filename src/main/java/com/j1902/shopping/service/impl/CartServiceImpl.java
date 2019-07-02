@@ -34,7 +34,6 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public PageInfo<Cart> getByCount(Integer currentPage, Integer number, Integer userId) {
-//        long count= cartMapper.countByExample(null);
         PageHelper.startPage(currentPage,number);
         CartExample cartExample = new CartExample();
         CartExample.Criteria criteria = cartExample.or();
