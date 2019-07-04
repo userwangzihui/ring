@@ -63,7 +63,6 @@ public class UserCartController {
     //添加购物车
     @RequestMapping("/card")
     public String itemCard(Integer id, Integer number, HttpSession session) {
-
         double Price = 0;
         User user = (User) session.getAttribute("USER_LOGIN");
         List<Cart> byId = cartService.getByItemId(id,user.getUserId());
