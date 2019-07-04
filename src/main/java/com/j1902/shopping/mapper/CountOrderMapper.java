@@ -7,7 +7,9 @@ import com.j1902.shopping.pojo.CountOrderExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CountOrderMapper {
     long countByExample(CountOrderExample example);
 
