@@ -78,32 +78,32 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
-      order by ${orderByClause}
+      `order` by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from `order`
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.j1902.shopping.pojo.OrderExample">
-    delete from order
+    delete from `order`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.j1902.shopping.pojo.Order">
-    insert into order (order_id, order_item_id, order_number, 
+    insert into `order` (order_id, order_item_id, order_number,
       order_money, order_count_id, order_itemname, 
       order_item_type)
     values (#{orderId,jdbcType=INTEGER}, #{orderItemId,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER}, 
@@ -111,7 +111,7 @@
       #{orderItemType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.j1902.shopping.pojo.Order">
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
         order_id,
@@ -166,7 +166,7 @@
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update order
+    update `order`
     <set>
       <if test="record.orderId != null">
         order_id = #{record.orderId,jdbcType=INTEGER},
@@ -195,7 +195,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update order
+    update `order`
     set order_id = #{record.orderId,jdbcType=INTEGER},
       order_item_id = #{record.orderItemId,jdbcType=INTEGER},
       order_number = #{record.orderNumber,jdbcType=INTEGER},
@@ -208,7 +208,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.j1902.shopping.pojo.Order">
-    update order
+    update `order`
     <set>
       <if test="orderItemId != null">
         order_item_id = #{orderItemId,jdbcType=INTEGER},
@@ -232,7 +232,7 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.j1902.shopping.pojo.Order">
-    update order
+    update `order`
     set order_item_id = #{orderItemId,jdbcType=INTEGER},
       order_number = #{orderNumber,jdbcType=INTEGER},
       order_money = #{orderMoney,jdbcType=DOUBLE},

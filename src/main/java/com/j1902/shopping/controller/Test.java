@@ -1,20 +1,16 @@
 package com.j1902.shopping.controller;
 
 import com.j1902.shopping.model.Remember;
-import com.j1902.shopping.pojo.Admin;
 import com.j1902.shopping.pojo.Item;
 import com.j1902.shopping.service.AdminService;
 import com.j1902.shopping.service.ItemService;
-import com.j1902.shopping.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -64,10 +60,6 @@ public class Test {
     public String goodsAdd() {
         return "back/goods_add";
     }
-
-
-
-
 
     @RequestMapping("/forget")
     public String forget(){

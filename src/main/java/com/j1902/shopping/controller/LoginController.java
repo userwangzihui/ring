@@ -36,6 +36,7 @@ public class LoginController {
                     cookUser = JsonUtils.jsonToPojo(userJson, User.class);
                     map.put("phone", cookUser.getUserPhone());
                     map.put("password", cookUser.getUserPwd());
+
                 }
                 if ("addCookie".equals(c.getName())) {
                     userService.deleteCookie(request, response);
@@ -80,9 +81,7 @@ public class LoginController {
             }
             List<User> users = userService.getByPhone(user);
             session.setAttribute("USER_LOGIN",users.get(0));
-
-
-            return "redirect:index";
+           return "front/member_info";
         } else if ("true".equals(rememberPassword)) {
             userService.addCookie(user.getUserPhone(), response);
             map.put("phone", user.getUserPhone());

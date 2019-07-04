@@ -1,14 +1,14 @@
 package com.j1902.shopping.config;
 
-;
 import com.j1902.shopping.intercept.TestHandlerInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+;
 
 //WebMvcConfiguration === WebMvcConfigurationSupport
 @SpringBootConfiguration
@@ -33,7 +33,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
     }
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:G:/upload/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:f:/upload/");
         registry.addResourceHandler("/templates/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/templates/");
         super.addResourceHandlers(registry);
     }

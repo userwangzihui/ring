@@ -60,4 +60,5 @@ public class UserAddress {
     public void setAddressCode(String addressCode) {
         this.addressCode = addressCode == null ? null : addressCode.trim();
     }
+    
 }

@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="hb-loaded">
 
 	<head>
 		<title>个人中心 - 首页</title>
@@ -105,7 +105,7 @@
 										<li>
 											<h3> -订单中心-</h3>
 											<ul class="member_ul-dr">
-												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
+												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" th:href="@{'member_order?userId='+${session.user.userId}}">我的订单</a></li>
 												<li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
 												<li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
 
@@ -117,7 +117,7 @@
 											<ul class="member_ul-dr">
 												<li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="member_info.html">个人信息</a></li>
 												<li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
-												<li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
+													<li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" th:href="@{'address?userPhone='+${session.user.userPhone}+'&userId='+${session.user.userId}}">收货地址</a></li>
 
 											</ul>
 										</li>
@@ -134,7 +134,7 @@
 												<!--名字-->
 												<div class="member_first-left-top">
 													<div class="mb_theleft fl">
-														<span>您好！</span>
+														<span th:text="'您好！'+${session.user.userName}"></span>
 														<a href="member_info.html">（个人信息完善）</a>
 													</div>
 												</div>

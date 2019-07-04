@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="hb-loaded">
     <head>
 <meta charset="utf-8"/>
     <title>个人中心 - 订单中心</title><!--/*技术支持，小庄602842076     验证：官网技术支持*/
@@ -197,24 +197,24 @@
                         </tr>
                     </tbody></table>
 
-                            <table cellspacing="0" cellpadding="0" border="0" class="member_myorder-table">
+                            <table th:each="OrderFrom:${OrderFrom}" cellspacing="0" cellpadding="0" border="0" class="member_myorder-table">
 
                                         <tbody><tr class="member_myorder-table-sec">
-                                            <td class="myorder-table-sec_td1" colspan="4">订单号：20150707888887</td>
-                                            <td class="myorder-table-sec_td2" colspan="2">下单时间：2015/7/7 22:04:56</td>
+                                            <td class="myorder-table-sec_td1" colspan="4" th:text="${OrderFrom.orderNumber}"></td>
+                                            <td class="myorder-table-sec_td2" colspan="2" th:text="${OrderFrom.orderTime}"></td>
                                         </tr>
-                                                <tr class="member_myorder-table-third">
+                                                <tr  class="member_myorder-table-third">
                                                     <td class="myorder-table_td1">
 
                                                                 <div class="myorder-table-third-cp">
                                                                     <div class="img_left fl">
                                                                           <a href="/darry_ring/87.html">
-                                                                        <img width="55" height="55" src="../../static/images/201409011932585de1c2f2a9.jpg">
+                                                                        <img width="55" height="55" th:src="'http://192.168.3.179:8080'+${OrderFrom.item.itemImg1}">
                                                                         </a>
                                                                     </div>
                                                                     <div class="img_right fr">
                                                                               <a href="/darry_ring/87.html">
-                                                                        <p>Forever系列 经典款 [DRNJ00015]</p>
+                                                                        <p th:text="${OrderFrom.item.itemName}" ></p>
                                                                         </a>
 
                                                                     </div>
@@ -223,23 +223,23 @@
                                                     </td>
                                                     <td class="myorder-table_td3">
 
-                                                                <div style="height:55px;line-height:55px;font-family:微软雅黑;" class="myorder-table-third-cp">
-                                                                3</div>
+                                                                <div style="height:55px;line-height:55px;font-family:微软雅黑;" class="myorder-table-third-cp" th:text="${OrderFrom.itemNumber}">
+                                                                </div>
 
                                                     </td>
-                                                    <td style="font-family:微软雅黑;" class="myorder-table_td2">
-                                                        ￥0
+                                                    <td style="font-family:微软雅黑;" class="myorder-table_td2" th:text="${OrderFrom.moneys}">
+
                                                         </td>
-                                                    <td class="myorder-table_td4"></td>
-                                                    <td class="myorder-table_td5">
-                                                        未处理
+                                                    <td class="myorder-table_td4" th:text="${OrderFrom.countMethod}"></td>
+                                                    <td class="myorder-table_td5" th:text="${OrderFrom.countSat}">
+
                                                     </td>
                                                     <td class="myorder-table_td6">
 
                                                         <a class="myorder-table_pay" href="/nCart/ConfirmOrder.aspx?orderid=20150707888887&process=other">支 付</a>
 
                                                          <p>
-                                                            <a href="member_order_detail.html">查看</a>
+                                                            <a th:href="@{'member_order_detail?countId='+${OrderFrom.countId}+'&orderId='+${OrderFrom.orderId}}">查看</a>
                                                         </p>
                                                         <p style="cursor:pointer">
                                                             <a onClick="deleteOrder(20150707888887)">取消订单</a>
