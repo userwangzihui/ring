@@ -64,29 +64,38 @@ public class UserCartController {
     //添加购物车
     @RequestMapping("/card")
     public String itemCard(Integer id, Integer number, HttpSession session){
-
         double Price=0;
-
-        Item item = itemPagService.getById(id);
         User user = (User) session.getAttribute("USER_LOGIN");
-        Price=number*item.getItemPrice();
-        Cart cart = new Cart();
-        cart.setUserId(user.getUserId());
-        cart.setItemId(id);
-        cart.setItemNumber(number);
-        cart.setCartItemName(item.getItemSeries());
-        cart.setCartItemMaterial(item.getItemType());
-        cart.setCartItemSize(item.getItemSize());
-        cart.setCartItemNumber(number);
-        cart.setCartItemPrice(Price);
-        cart.setCartItemImg(item.getItemImg2());
-
-        cartService.addCart(cart);
-        ///////////
-
+        List<Cart> byId = cartService.getByItemId(id,user.getUserId());
+        Item item = itemPagService.getById(id);
+        if (byId!=null&&byId.size()>0){
+            Cart cart = new Cart();
+            Integer cartItemNumber = byId.get(0).getCartItemNumber();
+            Integer itemNumber = cartItemNumber+number;
+            cart.setCartItemNumber(itemNumber);
+            cart.setItemNumber(itemNumber);
+            Price=itemNumber*item.getItemPrice();
+           cart.setCartItemPrice(Price);
+           cartService.uplateById(cart,id,user.getUserId());
+            System.out.println("99999999");
+            }else {
+            Price=number*item.getItemPrice();
+            Cart cart = new Cart();
+            cart.setUserId(user.getUserId());
+            cart.setItemId(id);
+            cart.setItemNumber(number);
+            cart.setCartItemName(item.getItemSeries());
+            cart.setCartItemMaterial(item.getItemType());
+            cart.setCartItemSize(item.getItemSize());
+            cart.setCartItemNumber(number);
+            cart.setCartItemPrice(Price);
+            cart.setCartItemImg(item.getItemImg2());
+            cartService.addCart(cart);
+        }
         return "redirect:pageCart";
 
     }
+
  //购物分页
     @RequestMapping("/pageCart")
     public String pageCart( Map<String,Object>map, HttpSession session,Integer currentPage){
@@ -112,14 +121,17 @@ public class UserCartController {
         //  map.put("carts",carts);
         return "front/cart";
     }
+
     //清空购物车
     @RequestMapping("/removeCart")
-    public String removeCart(){
+    public String removeCart(HttpSession session){
         System.out.println(1111);
-        cartService.deleteCart();
+        User user = (User) session.getAttribute("USER_LOGIN");
+        cartService.deleteCart(user.getUserId());
         return "redirect:pageCart";
     }
 
+//跳转页面
     @RequestMapping("/cartAgreement")
     public String cartAgreement(){
         return "front/cart_agreement";
@@ -128,17 +140,17 @@ public class UserCartController {
 
 
 
-//购物车结算
+ //购物车结算
     @RequestMapping("/cartOrder")
     public String cartOrder(HttpSession session,Map<String,Object>map){
         double prices=0;
       User user = (User) session.getAttribute("USER_LOGIN");
         cartService.getById(user.getUserId());
-
         PageInfo<Cart> carts = cartService.getByCount(1, 3, user.getUserId());
         map.put("carts",carts);
         return "front/cart_order";
     }
+
     //删除单个购物记录
     @RequestMapping("/deleteById")
     public String deleteById(Integer cid){
