@@ -105,8 +105,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.j1902.shopping.pojo.CountOrder">
-    insert into count_order (count_id, count_userid, count_remarks, 
+  <insert id="insert"  parameterType="com.j1902.shopping.pojo.CountOrder">
+    insert into count_order (count_id, count_userid, count_remarks,
       count_createtime, count_method, count_money, 
       count_sat, count_username, count_phone, 
       count_address)
@@ -115,7 +115,7 @@
       #{countSat,jdbcType=VARCHAR}, #{countUsername,jdbcType=VARCHAR}, #{countPhone,jdbcType=VARCHAR}, 
       #{countAddress,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.j1902.shopping.pojo.CountOrder">
+  <insert id="insertSelective"  parameterType="com.j1902.shopping.pojo.CountOrder">
     insert into count_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="countId != null">
@@ -288,4 +288,40 @@
       count_address = #{countAddress,jdbcType=VARCHAR}
     where count_id = #{countId,jdbcType=INTEGER}
   </update>
+
+  <resultMap type="com.j1902.shopping.model.OrdersQv" id="countOrders">
+    <!-- property 表示com.mybatis.bean.StudentTemp中的属性； column 表示表中的列名 -->
+    <id property="countId" column="count_id" />
+    <result property="countUserid" column="count_userid" />
+
+    <!-- association字面意思关联，这里只专门做一对一关联； property表示是com.mybatis.bean.StudentTemp中的属性名称；
+        javaType表示该属性是什么类型对象 -->
+    <collection property="orderList" ofType="com.j1902.shopping.pojo.Order" select="com.j1902.shopping.mapper.OrderMapper.selectByCountId" column="count_id">
+    <id property="orderId" column="order_id"/>
+      <result property="orderItemname" column="order_itemname"/>
+    </collection>
+  </resultMap>
+  <select id="selectBySta" parameterType="java.lang.String" resultMap="countOrders">
+  select
+  <include refid="Base_Column_List"/>
+  from
+  count_order
+  where
+  count_sat = #{sta}
+  </select>
+
+
+  <insert id="insertByKey" useGeneratedKeys="true" keyProperty="countId"  parameterType="com.j1902.shopping.pojo.CountOrder">
+    <selectKey resultType="java.lang.Integer" keyProperty="countId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into count_order (count_userid, count_remarks,
+      count_createtime, count_method, count_money,
+      count_sat, count_username, count_phone,
+      count_address)
+    values (#{countUserid,jdbcType=INTEGER}, #{countRemarks,jdbcType=VARCHAR},
+      #{countCreatetime,jdbcType=TIMESTAMP}, #{countMethod,jdbcType=VARCHAR}, #{countMoney,jdbcType=DOUBLE},
+      #{countSat,jdbcType=VARCHAR}, #{countUsername,jdbcType=VARCHAR}, #{countPhone,jdbcType=VARCHAR},
+      #{countAddress,jdbcType=VARCHAR})
+  </insert>
 </mapper>

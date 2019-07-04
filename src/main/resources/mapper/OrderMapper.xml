@@ -93,7 +93,7 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from `order`
+    delete from order
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.j1902.shopping.pojo.OrderExample">
@@ -102,8 +102,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.j1902.shopping.pojo.Order">
-    insert into `order` (order_id, order_item_id, order_number,
+  <insert id="insert" useGeneratedKeys="true" keyProperty="orderId" parameterType="com.j1902.shopping.pojo.Order">
+    <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="BEFORE" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order (order_id, order_item_id, order_number,
       order_money, order_count_id, order_itemname,
       order_item_type)
     values (#{orderId,jdbcType=INTEGER}, #{orderItemId,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER},
@@ -160,7 +163,7 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.j1902.shopping.pojo.OrderExample" resultType="java.lang.Long">
-    select count(*) from `order`
+    select count(*) from order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -241,4 +244,20 @@
       order_item_type = #{orderItemType,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
+  <select id="selectByCountId" resultType="com.j1902.shopping.pojo.Order" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    `order`
+    where
+    order_count_id = #{id};
+  </select>
+  <insert id="insertByOrder"  parameterType="com.j1902.shopping.pojo.Order">
+    insert into `order` (order_item_id, order_number,
+    order_money, order_count_id, order_itemname,
+    order_item_type)
+    values (#{orderItemId,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER},
+    #{orderMoney,jdbcType=DOUBLE}, #{orderCountId,jdbcType=INTEGER}, #{orderItemname,jdbcType=VARCHAR},
+    #{orderItemType,jdbcType=VARCHAR})
+  </insert>
 </mapper>

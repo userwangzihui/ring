@@ -2,14 +2,11 @@ package com.j1902.shopping.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.j1902.shopping.model.ItemNumber;
-import com.j1902.shopping.pojo.Cart;
-import com.j1902.shopping.pojo.Item;
-import com.j1902.shopping.pojo.User;
-import com.j1902.shopping.service.CartService;
-import com.j1902.shopping.service.ItemPagService;
-import com.j1902.shopping.service.ItemService;
-import com.j1902.shopping.service.UserService;
+import com.j1902.shopping.model.OrdersQv;
+import com.j1902.shopping.pojo.*;
+import com.j1902.shopping.service.*;
 import com.j1902.shopping.utils.JsonUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,18 +27,19 @@ public class UserCartController {
     @Autowired
     UserService userService;
     @RequestMapping("/detail")
-    public String ItemCart(Integer id, Map<String,Object>map){
+    public String ItemCart(Integer id, Map<String, Object> map) {
         Item item = itemService.getById(id);
-        map.put("item",item);
+        map.put("item", item);
         return "front/detail";
     }
+
     //直接购买
     @RequestMapping("/pag")
-    public String itemPag(Integer id,Integer number,Map<String,Object>map){
-        double Price=0;
+    public String itemPag(Integer id, Integer number, Map<String, Object> map) {
+        double Price = 0;
         Item item = itemPagService.getById(id);
-        Price=number*item.getItemPrice();
-        map.put("price",Price);
+        Price = number * item.getItemPrice();
+        map.put("price", Price);
         System.out.println("item = " + item);
         ItemNumber itemNumber = new ItemNumber();
         itemNumber.setNumber(number);
@@ -50,21 +48,23 @@ public class UserCartController {
         itemNumber.setItemSize(item.getItemSize());
         itemNumber.setItemType(item.getItemType());
         itemNumber.setItemPrice(item.getItemPrice());
-        List<ItemNumber>items=new ArrayList<>();
+        List<ItemNumber> items = new ArrayList<>();
         items.add(itemNumber);
-        map.put("item",items);
+        map.put("item", items);
         return "front/cart_order";
     }
+
     @RequestMapping("/updateAddress")
-    public String updateAddress(User user){
+    public String updateAddress(User user) {
         itemPagService.updateById(user);
         return "redirect:pag";
     }
 
     //添加购物车
     @RequestMapping("/card")
-    public String itemCard(Integer id, Integer number, HttpSession session){
-        double Price=0;
+    public String itemCard(Integer id, Integer number, HttpSession session) {
+
+        double Price = 0;
         User user = (User) session.getAttribute("USER_LOGIN");
         List<Cart> byId = cartService.getByItemId(id,user.getUserId());
         Item item = itemPagService.getById(id);
@@ -150,7 +150,6 @@ public class UserCartController {
         map.put("carts",carts);
         return "front/cart_order";
     }
-
     //删除单个购物记录
     @RequestMapping("/deleteById")
     public String deleteById(Integer cid){

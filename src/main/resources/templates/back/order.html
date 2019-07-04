@@ -70,7 +70,7 @@
 						<li class="green dropdown-modal">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-								<span class="badge badge-success">5</span>
+								<span class="badge badge-success" id="sp1"></span>
 							</a>
 
 							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
@@ -80,7 +80,7 @@
 								</li>
 
 								<li class="dropdown-footer">
-									<a href="javascript:void(0)">
+									<a href="/dealWait">
 										未处理订单
 										<i class="ace-icon fa fa-arrow-right"></i>
 									</a>
@@ -93,7 +93,7 @@
 								<img class="nav-user-photo" src="../../static/assets/images/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome</small>
-									Admin
+									<small th:text="${session.ADMIN_LOGIN.getAdminName()}"></small>
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -101,7 +101,7 @@
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="#">
+									<a href="/logout">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -166,7 +166,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="goods.html">
+								<a href="/order">
 									<i class="menu-icon fa fa-caret-right"></i>
 									查看商品
 								</a>
@@ -175,7 +175,7 @@
 							</li>
 
 							<li class="">
-								<a href="goods_add.html">
+								<a href="/goodsAdd">
 									<i class="menu-icon fa fa-caret-right"></i>
 									添加商品
 								</a>
@@ -197,7 +197,7 @@
 
 						<ul class="submenu">
 							<li class="active">
-								<a href="order.html">
+								<a href="/adminOrder">
 									<i class="menu-icon fa fa-caret-right"></i>
 									已处理订单
 								</a>
@@ -205,7 +205,7 @@
 								<b class="arrow"></b>
 							</li>
 							<li class="">
-								<a href="order_unfinished.html">
+								<a href="/adminOrder_unfinished">
 									<i class="menu-icon fa fa-caret-right"></i>
 									未处理订单
 								</a>
@@ -310,9 +310,10 @@
 												</tr>
 											</thead>
 
-											<tbody>
-												<tr>
-													<td class="center"> 1 </td>
+											<tbody >
+											<div th:each="order:${del.list}">
+												<tr >
+													<td class="center" th:text="${order.countId}">  </td>
 													<td class="center">
 														<div class="action-buttons">
 															<a href="#" class="green bigger-140 show-details-btn" title="Show Details">
@@ -320,14 +321,14 @@
 															</a>
 														</div>
 													</td>
-													<td class="center">demon</td>
-													<td class="center">17859900000</td>
-													<td class="hidden-480 center">福建省泉州市安溪县龙涓乡</td>
-													<td class="center">快快发货</td>
-													<td class="hidden-480 center"> 2017-11-11 12:12:12 </td>
-													<td class="center">联通</td>
-													<td class="center">50000.66</td>
-													<td class="center">已受理</td>
+													<td class="center" th:text="${order.countUsername}"></td>
+													<td class="center" th:text="${order.countPhone}"></td>
+													<td class="hidden-480 center" th:text="${order.countAddress}"></td>
+													<td class="center" th:text="${order.countRemarks}"></td>
+													<td class="hidden-480 center" th:text="${order.countCreatetime}">  </td>
+													<td class="center" th:text="${order.countMethod}"></td>
+													<td class="center" th:text="${order.countMoney}"></td>
+													<td class="center" th:text="${order.countSat}"></td>
 												</tr>
 
 												<tr class="detail-row">
@@ -337,24 +338,24 @@
 															<div class="col-xs-12 col-md-8">
 																<table id="simple-table" class="table  table-bordered table-hover">
 																	<thead>
-																		<tr>
-																			<th class="center col-md-1" style="background-color: #ecdfdf;">编号</th>
+																		<tr >
+																			<th class="center col-md-1" style="background-color: #ecdfdf;" >编号</th>
 																			<th class="center col-md-1" style="background-color: #ecdfdf;">名称</th>
-																			<th class="center col-md-1" style="background-color: #ecdfdf;">系列</th>
-																			<th class="center col-md-1" style="background-color: #ecdfdf;">类型</th>
-																			<th class="center col-md-1" style="background-color: #ecdfdf;">价格</th>
-																			<th class="center col-md-1" style="background-color: #ecdfdf;">数量</th>
+																			<!--<th class="center col-md-1" style="background-color: #ecdfdf;" th:text="${sorder.orderId}">系列</th>-->
+																			<th class="center col-md-1" style="background-color: #ecdfdf;" >类型</th>
+																			<th class="center col-md-1" style="background-color: #ecdfdf;" >价格</th>
+																			<th class="center col-md-1" style="background-color: #ecdfdf;" >数量</th>
 																		</tr>
 																	</thead>
 
 																	<tbody>
-																		<tr>
-																			<td class="center"> 1 </td>
-																			<td class="center">mylove系列</td>
-																			<td class="center">$45</td>
-																			<td class="hidden-480 center">3,330</td>
-																			<td class="center">Feb 12</td>
-																			<td class="hidden-480 center"> 500 </td>
+																		<tr th:each="sorder:${order.orderList}">
+																			<td class="center" th:text="${sorder.orderId}"> </td>
+																			<td class="center"  th:text="${sorder.orderItemname}"></td>
+																			<!--<td class="center">$45</td>-->
+																			<td class="hidden-480 center"th:text="${sorder.orderItemType}"></td>
+																			<td class="center" th:text="${sorder.orderMoney}"></td>
+																			<td class="hidden-480 center" th:text="${sorder.orderNumber}"></td>
 																		</tr>
 
 																	</tbody>
@@ -364,6 +365,8 @@
 														</div><!-- /.row -->
 													</td>
 												</tr>
+											</div>
+
 											</tbody>
 										</table>
 									</div><!-- /.span -->
@@ -372,7 +375,7 @@
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 					<!--page-->
-					<div class="page col-md-12">
+					<!--<div class="page col-md-12">
 						<ul class="pagination pull-right no-margin">
 							<li class="prev ">
 								<a href="#">
@@ -380,8 +383,8 @@
 								</a>
 							</li>
 
-							<li class="active">
-								<a href="#">1</a>
+							<li class="active" >
+								<a href="#" >1</a>
 							</li>
 
 							<li>
@@ -402,6 +405,28 @@
 
 							<li class="next">
 								<a href="#">
+									<i class="ace-icon fa fa-angle-double-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>-->
+					<div class="page col-md-12">
+						<ul class="pagination pull-right no-margin">
+							<li class="prev ">
+								<a th:href="@{'/adminOrder?number='+${del.prePage}}" >
+									<i class="ace-icon fa fa-angle-double-left"></i>
+								</a>
+							</li>
+							<input hidden id="p1" th:value="${del.pageNum}">
+							<input hidden id="p2" th:value="${del.firstPage}">
+							<input hidden id="p3" th:value="${del.lastPage}">
+							<li  th:each="it:${del.navigatepageNums}">
+								<input hidden class="bj" th:value="${it}">
+								<a th:href="@{'/adminOrder?number='+${it}}" th:text="${it}" ></a>
+							</li>
+
+							<li class="next">
+								<a th:href="@{'/adminOrder?number='+${del.nextPage}}" >
 									<i class="ace-icon fa fa-angle-double-right"></i>
 								</a>
 							</li>
@@ -448,6 +473,27 @@
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+			$.post("message",
+					function(data,status){
+						console.log("收到的是："+data+"--");
+						$("#sp1").text(data);
+					});
+
+			var b1 = $("#p2").val();
+			var b2 = $("#p3").val();
+			var v2 = $("#p1").val();
+			if (b1==v2) {
+				$("#a1").parent().addClass("disabled");
+				$("#a1").removeAttr("href");
+			}
+			$(".bj").each(function () {
+				var v1= $(this).val();
+				if (v1==v2){
+					$(this).parent().addClass("active");
+				} else{
+					$(this).parent().removeClass("active");
+				}
+			})
 			jQuery(function($) {
 				/***************/
 				$('.show-details-btn').on('click', function(e) {

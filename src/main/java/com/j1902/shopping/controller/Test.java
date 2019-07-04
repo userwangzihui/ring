@@ -1,20 +1,28 @@
 package com.j1902.shopping.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.j1902.shopping.mapper.CountOrderMapper;
+import com.j1902.shopping.model.OrdersQv;
 import com.j1902.shopping.model.Remember;
 import com.j1902.shopping.pojo.Admin;
+import com.j1902.shopping.pojo.CountOrder;
 import com.j1902.shopping.pojo.Item;
 import com.j1902.shopping.service.AdminService;
 import com.j1902.shopping.service.ItemService;
+import com.j1902.shopping.service.OrderService;
 import com.j1902.shopping.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,20 +32,18 @@ public class Test {
     private ItemService itemService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping("/AdminLogin")
     public String L(HttpServletRequest request, HttpSession session, Map<String, Object> map) throws UnsupportedEncodingException {
         Remember cookAdmin = adminService.showPwd(request);
-        System.out.println("好烦："+cookAdmin);
         if (cookAdmin != null) {
-            System.out.println("方式1");
             session.setAttribute("adminName", cookAdmin.getAdminName());
             session.setAttribute("adminPwd", cookAdmin.getAdminPwd());
             session.setAttribute("adminRemember", cookAdmin.getRemember());
         } else {
-            System.out.println("方式2");
             if (session.getAttribute("to")== null&&session.getAttribute("one")==null) {
-                System.out.println("方式3");
                 session.removeAttribute("adminName");
                 session.removeAttribute("adminPwd");
                 session.removeAttribute("adminRemember");
@@ -65,12 +71,60 @@ public class Test {
         return "back/goods_add";
     }
 
+    @RequestMapping("/adminOrder")
+    public String adminOrder(Map<String, Object> map, Integer number) {
+        PageInfo<OrdersQv> pa = null;
+        String order = "count_createtime  desc";
+        if (number != null) {
+            pa = orderService.seletCountOrderByPage(number, 2,order, "已处理");
+        } else {
+            pa = orderService.seletCountOrderByPage(1, 2, order,"已处理");
+        }
+        map.put("del", pa);
+        System.out.println(pa);
+        return "back/order";
+    }
 
+    @RequestMapping("/adminOrder_unfinished")
+    public String adminOrder_unfinished(Map<String, Object> map,Integer currentPage) {
+        PageInfo<OrdersQv> pa = null;
+        String order = "count_createtime  desc";
+        if (currentPage != null) {
+            pa = orderService.seletCountOrderByPage(currentPage, 2,order ,"未处理");
+        } else {
+            pa = orderService.seletCountOrderByPage(1, 2, order,"未处理");
+        }
+        map.put("undel", pa);
+        return "back/order_unfinished";
+    }
 
 
 
     @RequestMapping("/forget")
     public String forget(){
         return "front/forget";
+    }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("ADMIN_LOGIN");
+        return "back/login";
+    }
+    @RequestMapping("/dealwith")
+    public String OrderDealWith(Integer id,Integer Page){
+        orderService.updateCountOrderStaById(id);
+        return "redirect:adminOrder_unfinished?currentPage="+Page;
+    }
+
+    @RequestMapping("/dealWait")
+    public String OrderDealWait(){
+        orderService.updateCountOrderStaBySat();
+        return "redirect:adminOrder_unfinished";
+    }
+    @RequestMapping("/message")
+    @ResponseBody
+    public Integer getWaitOrder(){
+        Map<String,Object> map = new HashMap<>();
+        int i = orderService.selectWaitCountOrder();
+        return i;
     }
 }

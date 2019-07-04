@@ -27,20 +27,19 @@ public class CartServiceImpl implements CartService {
         CartExample.Criteria criteria = cartExample.or();
         criteria.andUserIdEqualTo(id);
         List<Cart> carts = cartMapper.selectByExample(cartExample);
-        return carts;
+        return carts!=null?carts:null;
     }
 
     //分页该用户购物车数据
     @Override
     public PageInfo<Cart> getByCount(Integer currentPage, Integer number, Integer userId) {
-//        long count= cartMapper.countByExample(null);
         PageHelper.startPage(currentPage,number);
         CartExample cartExample = new CartExample();
         CartExample.Criteria criteria = cartExample.or();
         criteria.andUserIdEqualTo(userId);
         List<Cart> carts = cartMapper.selectByExample(cartExample);
         PageInfo<Cart> cartPageInfo = new PageInfo<>(carts);
-        return cartPageInfo;
+        return cartPageInfo!=null?cartPageInfo:null;
 
     }
     //清空购物车

@@ -8,4 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface AddItemService {
     public void addItem(Item item);
+    public void deleteItem(Integer id);
+    public void updateItem(Item item);
 }

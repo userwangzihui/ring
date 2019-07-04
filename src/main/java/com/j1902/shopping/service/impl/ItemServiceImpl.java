@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
     @Autowired
-    ItemMapper itemMapper;
+    private ItemMapper itemMapper;
     @Override
     public List<Item> getByItem() {
         List<Item> items = itemMapper.selectByExample(null);

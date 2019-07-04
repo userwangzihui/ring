@@ -1,7 +1,6 @@
 package com.j1902.shopping.controller;
 
 import com.j1902.shopping.pojo.Item;
-import com.j1902.shopping.service.ItemPagService;
 import com.j1902.shopping.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +14,11 @@ public class ItemBuyNumberController {
     @Autowired
     ItemService itemService;
 
-
-    @RequestMapping("/index")
+        @RequestMapping("/index")
     public String ItemBuyNumber(Map<String ,Object>map){
         List<Item> byBuyNumber = itemService.getByBuyNumber();
         System.out.println("byBuyNumber = " + byBuyNumber);
         for (int i =0;i<8;i++){
-            System.out.println("哈哈哈："+byBuyNumber.get(i).getItemImg2());
             String img="img"+i;
             map.put(img,byBuyNumber.get(i));
         }
@@ -30,9 +27,7 @@ public class ItemBuyNumberController {
     @RequestMapping("/ItemPrice")
     public String ItemPrice(Map<String ,Object>map){
         List<Item> byBuyNumber = itemService.getByPrice();
-        System.out.println("byBuyNumber = " + byBuyNumber);
         for (int i =0;i<8;i++){
-            System.out.println("嘿嘿嘿："+byBuyNumber.get(i).getItemImg2());
             String img="img"+i;
             map.put(img,byBuyNumber.get(i));
         }

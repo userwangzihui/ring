@@ -16,12 +16,22 @@ import java.net.URLDecoder;
 @Service
 public class AddItemServiceImpl implements AddItemService {
     @Autowired
-    ItemMapper itemMapper;
+    private ItemMapper itemMapper;
 
     @Override
     public void addItem(Item item) {
         itemMapper.insert(item);
 
+    }
+
+    @Override
+    public void deleteItem(Integer id) {
+        itemMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateItem(Item item) {
+        itemMapper.updateByPrimaryKeySelective(item);
     }
 
 }

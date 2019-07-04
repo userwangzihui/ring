@@ -12,6 +12,16 @@
 
 		<iframe src="javascript:false;" style="display: none;"></iframe>
 		<form id="aspnetForm" action="Address.aspx?action=post&amp;process=darryring" method="post" name="aspnetForm">
+
+		<!--具体提交的数据-->
+			<input id="t1" type="hidden" name="countRemarks"  />
+			<input id="t5"type="hidden" name="countMoney" />
+
+
+
+
+
+
 			<!--全部背景-->
 			<div class="all-thing">
 				<!--中间内容-->
@@ -187,7 +197,7 @@
 
 						}
 						$(function() {
-							$("#aspnetForm").attr("action", "cart_order_success.html");
+							$("#aspnetForm").attr("action", "/redPag");
 						});
 					</script>
 					<!--内容-->
@@ -199,7 +209,7 @@
 							<div class="shop_cort-adress">
 								<!--地址-->
 								<div class="shop_adress-top">
-									<input type="radio" checked="checked" name="adress" value="61921" />
+									<input type="radio" checked="checked"  value="61921" />
 									<label th:text="${session.USER_LOGIN.userAddress}"></label>
 									<label th:text="${session.USER_LOGIN.userName}+'(收)'+${session.USER_LOGIN.userPhone}"> </label>
 									<span>默认地址</span>
@@ -258,12 +268,13 @@
 												<td class="shop_adress-kz">数量</td>
 												<td class="shop_adress-pirce">价 格</td>
 											</tr>
-											<tr class="shop_adressqr-sec" th:each="items :${item}">
-												<td class="shop_adress-shoop" th:text="${items.itemSeries}" ></td>
-												<td class="shop_adress-cz" th:text="${items.itemType}"></td>
-												<td class="shop_adress-sc"th:text="${items.itemSize}"></td>
-												<td class="shop_adress-kz"th:text="${items.number}"></td>
-												<td class="shop_adress-pirce"><span style="font-family:微软雅黑"th:text="'￥'+${items.itemPrice}"></span></td>
+											<tr class="shop_adressqr-sec" th:each="items :${carts.list}">
+
+												<td class="shop_adress-shoop" th:text="${items.cartItemName}" ></td>
+												<td class="shop_adress-cz" th:text="${items.cartItemMaterial}"></td>
+												<td class="shop_adress-sc"th:text="${items.cartItemSize}"></td>
+												<td class="shop_adress-kz"th:text="${items.cartItemNumber}"></td>
+												<td class="shop_adress-pirce"><span style="font-family:微软雅黑"th:text="'￥'+${items.cartItemPrice}"></span></td>
 											</tr>
 										</tbody>
 									</table>
@@ -285,7 +296,7 @@
 									<div class="shop_adress-last">
 										<div class="shop_adress-ddbz fl">
 											<p>订单备注</p>
-											<textarea placeholder="此处请勿填写有关支付方面的信息,留言请在50字以内。" class="shop_adress-text" name="ordernote"></textarea>
+											<input type="text"  placeholder="此处请勿填写有关支付方面的信息,留言请在50字以内。" class="shop_adress-text" name="message"></input>
 										</div>
 										<div onClick="submitOrder();" class="shop_adress-tjdd fr">
 											<div class="bt1 fr">

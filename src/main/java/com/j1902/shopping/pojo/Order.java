@@ -7,6 +7,19 @@ public class Order {
 
     private Integer orderNumber;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", orderItemId=" + orderItemId +
+                ", orderNumber=" + orderNumber +
+                ", orderMoney=" + orderMoney +
+                ", orderCountId=" + orderCountId +
+                ", orderItemname='" + orderItemname + '\'' +
+                ", orderItemType='" + orderItemType + '\'' +
+                '}';
+    }
+
     private Double orderMoney;
 
     private Integer orderCountId;
