@@ -193,7 +193,6 @@ public class UserCartController {
     //查看订单
     @RequestMapping("/toCountOrder")
     public String toCountOrder(Integer cid) {
-        System.out.println("我进入了");
         return null;
     }
 }

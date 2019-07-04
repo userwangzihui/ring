@@ -2,6 +2,7 @@ package com.j1902.shopping.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CountOrder {
@@ -28,6 +29,16 @@ public class CountOrder {
     }
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date countCreatetime;
+
+    private String sdf;
+
+    public String getSdf() {
+        return new SimpleDateFormat("yyyy-HH-mm HH:mm:ss").format(countCreatetime);
+    }
+
+    public void setSdf(String sdf) {
+        this.sdf = sdf;
+    }
 
     private String countMethod;
 
