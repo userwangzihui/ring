@@ -187,7 +187,7 @@
 
                 }
                 $(function() {
-                    $("#aspnetForm").attr("action", "cart_order_success.html");
+                    $("#aspnetForm").attr("action", "/redPag");
                 });
             </script>
             <!--内容-->
@@ -258,7 +258,13 @@
                                     <td class="shop_adress-kz">数量</td>
                                     <td class="shop_adress-pirce">价 格</td>
                                 </tr>
-                                <tr class="shop_adressqr-sec" th:each="items :${item}">
+                                <input  hidden name="countMoney" th:value="${price}">
+                                <tr class="shop_adressqr-sec" th:each="items,iterStat :${item}">
+                                    <input  hidden th:name="'orderList['+${iterStat.index}+'].orderItemId'" th:value="${items.itemId}">
+                                    <input  hidden th:name="'orderList['+${iterStat.index}+'].orderNumber'" th:value="${items.itemNumber}">
+                                    <input  hidden th:name="'orderList['+${iterStat.index}+'].orderMoney'" th:value="${items.cartItemPrice}">
+                                    <input  hidden th:name="'orderList['+${iterStat.index}+'].orderItemname'" th:value="${items.cartItemName}">
+                                    <input  hidden th:name="'orderList['+${iterStat.index}+'].orderItemType'" th:value="${items.cartItemMaterial}">
                                     <td class="shop_adress-shoop" th:text="${items.cartItemName}" ></td>
                                     <td class="shop_adress-cz" th:text="${items.cartItemMaterial}"></td>
                                     <td class="shop_adress-sc"th:text="${items.cartItemSize}"></td>
@@ -280,12 +286,13 @@
                                     <i style="font-family:微软雅黑" class="fw_bold" th:text="'￥'+${price}"></i>
                                 </div>
                             </div>
+
                             <!--总计-->
                             <!--最后一块-->
                             <div class="shop_adress-last">
                                 <div class="shop_adress-ddbz fl">
                                     <p>订单备注</p>
-                                    <textarea placeholder="此处请勿填写有关支付方面的信息,留言请在50字以内。" class="shop_adress-text" name="ordernote"></textarea>
+                                    <textarea placeholder="此处请勿填写有关支付方面的信息,留言请在50字以内。" class="shop_adress-text" name="message"></textarea>
                                 </div>
                                 <div onClick="submitOrder();" class="shop_adress-tjdd fr">
                                     <div class="bt1 fr">

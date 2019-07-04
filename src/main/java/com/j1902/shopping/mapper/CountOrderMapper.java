@@ -21,6 +21,8 @@ public interface CountOrderMapper {
 
     int insertSelective(CountOrder record);
 
+    int insertByKey(CountOrder record);
+
     List<CountOrder> selectByExample(CountOrderExample example);
 
     CountOrder selectByPrimaryKey(Integer countId);

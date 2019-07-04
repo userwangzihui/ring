@@ -36,9 +36,14 @@
 					<!--导航条end-->
 
 					<script type="text/javascript">
-						function deleteCart(cid) {
+
+						function deleteCart() {
+							var cid =  $("#it1").val();
+
+
 							if (confirm("确认删除？")) {
-								$.post("/nAPI/Cart.aspx?action=delete&cid=" + cid, function() {
+
+								$.post("/deleteById?cid=" + cid, function() {
 									window.location.reload();
 								});
 							}
@@ -76,13 +81,14 @@
 									</tr>
 									<tr class="cp_tr" th:each="cart:${carts.list}">
 										<td class="sp_td">
-											<a href="/darry_ring/87.html" class="jx_shop"> <img width="85" height="85" th:src="${cart.cartItemImg}" /> <span th:text="${cart.cartItemName}"> </span></a>
+											<a href="javascript:false" class="jx_shop"> <img width="85" height="85" th:src="${cart.cartItemImg}" /> <span th:text="${cart.cartItemName}"> </span></a>
 										</td>
 										<td class="cz_td" th:text="${cart.cartItemMaterial}"></td>
 										<td class="sc_td" th:text="${cart.cartItemSize}"></td>
 										<td class="kz_td" th:text="${cart.itemNumber}"></td>
 										<td style="font-family:微软雅黑" class="gm_td" th:text="'￥'+${cart.cartItemPrice}"></td>
-										<td class="close_td"><span onClick="deleteCart(61538);" class="sicon s_close"></span></td>
+										<input hidden="hidden" th:value="${cart.cartId}" id="it1">
+										<td class="close_td" ><span onClick="deleteCart();" class="sicon s_close" ></span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -94,11 +100,9 @@
 							<div class="shop_js">
 
 
-
-
-								<a class="jx_shop" href="TrueLove.html">继续购物</a>
+								<a class="jx_shop" href="/index">继续购物</a>
 								<a class="qk_shop" href="javascript:clearCart();">清空购物车</a>
-								<span>你购买了<i th:text="${count}"></i>件商品</span>
+								<span>你购买了<i th:text="${carts.total}"></i>件商品</span>
 								<span>总计：<i style="font-family:微软雅黑" class="fw_bold" th:text="'￥'+${prices}"></i></span>
 
 								<span onClick="toPay();" class="end_bt"><em>立即结算</em></span>

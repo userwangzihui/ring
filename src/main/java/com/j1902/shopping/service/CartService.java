@@ -11,4 +11,5 @@ public interface CartService {
     public List<Cart> getById(Integer id);
     public PageInfo<Cart> getByCount(Integer currentPage, Integer number, Integer userId);
     public void deleteCart();
+    public void deleteByCarId(Integer id);
 }

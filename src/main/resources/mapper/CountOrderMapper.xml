@@ -105,8 +105,8 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.j1902.shopping.pojo.CountOrder">
-    insert into count_order (count_id, count_userid, count_remarks, 
+  <insert id="insert"  parameterType="com.j1902.shopping.pojo.CountOrder">
+    insert into count_order (count_id, count_userid, count_remarks,
       count_createtime, count_method, count_money, 
       count_sat, count_username, count_phone, 
       count_address)
@@ -115,7 +115,7 @@
       #{countSat,jdbcType=VARCHAR}, #{countUsername,jdbcType=VARCHAR}, #{countPhone,jdbcType=VARCHAR}, 
       #{countAddress,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.j1902.shopping.pojo.CountOrder">
+  <insert id="insertSelective"  parameterType="com.j1902.shopping.pojo.CountOrder">
     insert into count_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="countId != null">
@@ -309,4 +309,19 @@
   where
   count_sat = #{sta}
   </select>
+
+
+  <insert id="insertByKey" useGeneratedKeys="true" keyProperty="countId"  parameterType="com.j1902.shopping.pojo.CountOrder">
+    <selectKey resultType="java.lang.Integer" keyProperty="countId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into count_order (count_userid, count_remarks,
+      count_createtime, count_method, count_money,
+      count_sat, count_username, count_phone,
+      count_address)
+    values (#{countUserid,jdbcType=INTEGER}, #{countRemarks,jdbcType=VARCHAR},
+      #{countCreatetime,jdbcType=TIMESTAMP}, #{countMethod,jdbcType=VARCHAR}, #{countMoney,jdbcType=DOUBLE},
+      #{countSat,jdbcType=VARCHAR}, #{countUsername,jdbcType=VARCHAR}, #{countPhone,jdbcType=VARCHAR},
+      #{countAddress,jdbcType=VARCHAR})
+  </insert>
 </mapper>

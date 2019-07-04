@@ -15,6 +15,22 @@ public class Cart {
 
     private String cartItemSize;
 
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartId=" + cartId +
+                ", userId=" + userId +
+                ", itemId=" + itemId +
+                ", itemNumber=" + itemNumber +
+                ", cartItemName='" + cartItemName + '\'' +
+                ", cartItemMaterial='" + cartItemMaterial + '\'' +
+                ", cartItemSize='" + cartItemSize + '\'' +
+                ", cartItemNumber=" + cartItemNumber +
+                ", cartItemPrice=" + cartItemPrice +
+                ", cartItemImg='" + cartItemImg + '\'' +
+                '}';
+    }
+
     private Integer cartItemNumber;
 
     private Double cartItemPrice;

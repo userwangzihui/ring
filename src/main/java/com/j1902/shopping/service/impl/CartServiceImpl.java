@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService {
         CartExample.Criteria criteria = cartExample.or();
         criteria.andUserIdEqualTo(id);
         List<Cart> carts = cartMapper.selectByExample(cartExample);
-        return carts;
+        return carts!=null?carts:null;
     }
 
     @Override
@@ -40,13 +40,18 @@ public class CartServiceImpl implements CartService {
         criteria.andUserIdEqualTo(userId);
         List<Cart> carts = cartMapper.selectByExample(cartExample);
         PageInfo<Cart> cartPageInfo = new PageInfo<>(carts);
-        return cartPageInfo;
+        return cartPageInfo!=null?cartPageInfo:null;
 
     }
 
     @Override
     public void deleteCart() {
         cartMapper.deleteByExample(null);
+    }
+
+    @Override
+    public void deleteByCarId(Integer id) {
+        cartMapper.deleteByPrimaryKey(id);
     }
 
 
