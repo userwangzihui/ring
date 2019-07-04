@@ -239,7 +239,7 @@
                                                         <a class="myorder-table_pay" href="/nCart/ConfirmOrder.aspx?orderid=20150707888887&process=other">支 付</a>
 
                                                          <p>
-                                                            <a th:href="@{'member_order_detail?countId='+${OrderFrom.countId}+'&orderId='+${OrderFrom.orderId}}">查看</a>
+                                                            <a th:href="@{'member_order_detail?countId='+${OrderFrom.countId}+'&item='+${OrderFrom.item}}">查看</a>
                                                         </p>
                                                         <p style="cursor:pointer">
                                                             <a onClick="deleteOrder(20150707888887)">取消订单</a>

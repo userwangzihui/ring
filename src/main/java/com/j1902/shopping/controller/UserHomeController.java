@@ -126,8 +126,10 @@ public class UserHomeController {
     }
     @RequestMapping("member_order_detail")
     public String memberOrderDetail( Map<String,Object> map ,Integer countId,Integer orderId){
-        CountOrder countOrderountOrder = userHomeService.getByCountIdCountOrder(countId);
+        CountOrder countOrder = userHomeService.getByCountIdCountOrder(countId);
         Order order = userHomeService.getByOrderIdOrder(orderId);
+        map.put("CountOrder",countOrder);
+        map.put("Order",order);
         return "front/member_order_detail";
     }
 }
