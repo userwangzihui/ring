@@ -136,9 +136,6 @@ public class UserCartController {
         return "front/cart_agreement";
     }
 
-
-
-
  //购物车结算
     @RequestMapping("/cartOrder")
     public String cartOrder(HttpSession session,Map<String,Object>map){

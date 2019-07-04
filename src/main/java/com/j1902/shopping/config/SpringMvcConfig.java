@@ -35,7 +35,7 @@ public class SpringMvcConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
         /*registry.addResourceHandler("/upload/**").addResourceLocations("file:G:/upload/");*/
         registry.addResourceHandler("/templates/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/templates/");
-        registry.addResourceHandler("/f/**").addResourceLocations("file:D:/f/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:G:/upload/");
         super.addResourceHandlers(registry);
     }
 
