@@ -166,8 +166,6 @@ public class UserCartController {
     @RequestMapping("/redPag")
     public String redPag(Map<String, Object> map, HttpSession session, OrdersQv orders, Double countMoney, @Param("message") String message) {
         User user = (User) session.getAttribute("USER_LOGIN");
-        System.out.println("金钱是：" + countMoney);
-        System.out.println("留言是：" + message);
         CountOrder countOrder = new CountOrder();
         countOrder.setCountSat("待处理");
         countOrder.setCountCreatetime(new Date());
