@@ -25,12 +25,6 @@ public class RegisterController {
     @RequestMapping("register")
     public String register(User user, HttpSession session) {
         System.out.println("user = " + user.toString());
-        Boolean b=true;
-        while (b){
-            String s = RandomCreatUtil.codeCreate(10);
-            b=userServiceS.getByUserName(s);
-            user.setUserName(s);
-        }
          userService.setUser(user);
         return "front/login";
     }
