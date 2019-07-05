@@ -36,6 +36,7 @@ public class LoginController {
                     cookUser = JsonUtils.jsonToPojo(userJson, User.class);
                     map.put("phone", cookUser.getUserPhone());
                     map.put("password", cookUser.getUserPwd());
+
                 }
                 if ("addCookie".equals(c.getName())) {
                     userService.deleteCookie(request, response);
@@ -79,17 +80,18 @@ public class LoginController {
                 userService.deleteCookie(request, response);
             }
             List<User> users = userService.getByPhone(user);
+            if (users.get(0).getUserRealname()!=null){
+                session.setAttribute("USER_LOGIN",users.get(0));
+                return "front/member_index";
+            }
             session.setAttribute("USER_LOGIN",users.get(0));
-
-
-            return "redirect:index";
+           return "front/member_info";
         } else if ("true".equals(rememberPassword)) {
             userService.addCookie(user.getUserPhone(), response);
             map.put("phone", user.getUserPhone());
             map.put("loginFail", "用户名与密码不匹配！");
             return "front/login";
         }
-
         map.put("phone", user.getUserPhone());
         map.put("loginFail", "用户名与密码不匹配！");
         return "front/login";

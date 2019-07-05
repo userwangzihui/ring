@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="hb-loaded">
 	<head>
 		<title>个人中心 - 订单详情</title>
 		 <meta charset="utf-8"/>
@@ -131,22 +131,22 @@
 		   <ul class="member_cort-ul">
 				<li>
 					<h3> -订单中心-</h3>
-					<ul class="member_ul-dr">
-						<li id="ctl00_content_treeId_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
-						<li id="ctl00_content_treeId_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
-						<li id="ctl00_content_treeId_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
+                    <ul class="member_ul-dr">
+                        <li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" th:href="@{'member_order?userId='+${session.USER_LOGIN.userId}}">我的订单</a></li>
+                        <li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
+                        <li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
 
-					</ul>
-				</li>
+                    </ul>
+                </li>
 
-				<li>
-					<h3> -帐户管理-</h3>
-					<ul class="member_ul-dr">
-						<li class="speacil_color" id="ctl00_content_treeId_myinfo"><a rel="nofollow" href="member_info.html">个人信息</a></li>
-						<li id="ctl00_content_treeId_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
-						<li id="ctl00_content_treeId_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
+               <li>
+                   <h3> -帐户管理-</h3>
+                   <ul class="member_ul-dr">
+                       <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" th:href="@{'member_info?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}" >个人信息</a></li>
+                       <li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
+                       <li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" th:href="@{'address?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}">收货地址</a></li>
 
-					</ul>
+                   </ul>
 				</li>
 			</ul>
 		</div>
@@ -159,15 +159,15 @@
                 	<!--详情顶部-->
                     <ul class="member_myorder-xq-tittle">
                     	<li>
-                        	<i>您的订单号：20150707888887</i>
+                        	<i th:text="'您的订单号：'+${CountOrder.countId}">20150707888887</i>
                         </li>
                         <li>
                         	<i>订单状态： </i>
-                            <a href="#">未处理</a>
+                            <a href="#" th:text="${CountOrder.countSat}"></a>
                         </li>
                         <li>
                             <i>下单时间：</i>
-                            <span>2015/7/7 22:04:56</span>
+                            <span th:text="${time}"></span>
                         </li>
                     </ul>
                     <!--详情顶部-->
@@ -319,31 +319,31 @@
                         <table cellspacing="0" cellpadding="0" border="0" class="myorder-xq-news_table" style="font-family:微软雅黑">
                         	<tbody><tr>
                             	<td class="news_table-td1">订单状态</td>
-                                <td class="news_table-td2">未处理</td>
+                                <td class="news_table-td2" th:text="${CountOrder.countSat}"></td>
                                 <td class="news_table-td1">下单日期</td>
-                                <td class="news_table-td3"></td>
+                                <td class="news_table-td3" th:text="${time}"></td>
                             </tr>
                             <tr>
                             	<td class="news_table-td1">订单总金额</td>
-                                <td class="news_table-td2">￥10,800</td>
+                                <td class="news_table-td2" th:text="${CountOrder.countMoney}"></td>
                                 <td class="news_table-td1">物流方式</td>
-                                <td class="news_table-td3"></td>
+                                <td class="news_table-td3" th:text="${CountOrder.countMethod}"></td>
                             </tr>
                             <tr>
                             	<td class="news_table-td1">收货人</td>
-                                <td class="news_table-td2">张合</td>
+                                <td class="news_table-td2" th:text="${CountOrder.countUsername}"></td>
                                 <td class="news_table-td1">邮政编码</td>
-                                <td class="news_table-td3">223311</td>
+                                <td class="news_table-td3" th:text="${userAddress.addressCode}"></td>
                             </tr>
                             <tr>
                             	<td class="news_table-td1">移动电话</td>
-                                <td class="news_table-td2">13851435593</td>
+                                <td class="news_table-td2" th:text="${CountOrder.countPhone}"></td>
                                 <td class="news_table-td1">收货人地址</td>
-                                <td class="news_table-td3"></td>
+                                <td class="news_table-td3" th:text="${CountOrder.countAddress}"></td>
                             </tr>
                              <tr>
                             	<td class="news_table-td1">备注</td>
-                                <td colspan="3" class="news_table-td4">纯手工</td>
+                                <td colspan="3" class="news_table-td4" th:text="${CountOrder.countRemarks}"></td>
                             </tr>
                         </tbody></table>
                         <!--订单信息的table end-->
@@ -364,20 +364,20 @@
                                     <tr class="xq-shop_table-trsec">
                             	        <td class="xq-shop_table-td1">
                                 	        <a href="/darry_ring/87.html">
-                                            <img width="55" height="55" class="fl" src="../../static/images/201409011932585de1c2f2a9.jpg">
-                                            <span class="fl">
-                                            Forever系列 经典款
+                                            <img width="55" height="55" class="fl" th:src="'http://192.168.3.179:8080'+${Item.itemImg1}">
+                                            <span class="fl" th:text="${Item.itemSeries}+' '+${Item.itemName}">
+
                                             </span></a>
                                         </td>
                                         <td class="xq-shop_table-td2">
-                                	        <p>30分 G色</p><p>VS2 EX</p><p></p>
+                                	        <p th:text="${Item.itemHeight}"></p>
                               	        </td>
-                                        <td class="xq-shop_table-td3">18K白金</td>
-                                        <td class="xq-shop_table-td4">
-                                	        <p>7</p>
+                                        <td class="xq-shop_table-td3" th:text="${Item.itemType}"></td>
+                                        <td class="xq-shop_table-td4" th:text="${Item.itemSize}">
+                                	        <p th:text="${Item.itemSize}"></p>
                                         </td>
-                                        <td class="xq-shop_table-td5">素材火♥</td>
-                                        <td style="font-family:微软雅黑" class="xq-shop_table-td6">￥10,800</td>
+                                        <td class="xq-shop_table-td5" th:text="${Item.itemNumber}"></td>
+                                        <td style="font-family:微软雅黑" class="xq-shop_table-td6" th:text="'￥'+${Item.itemPrice}"></td>
                                     </tr>
 
                         </tbody></table>

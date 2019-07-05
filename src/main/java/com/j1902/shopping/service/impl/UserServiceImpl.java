@@ -5,6 +5,7 @@ import com.j1902.shopping.pojo.User;
 import com.j1902.shopping.pojo.UserExample;
 import com.j1902.shopping.service.UserService;
 import com.j1902.shopping.utils.JsonUtils;
+import com.j1902.shopping.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,9 @@ public class UserServiceImpl implements UserService {
         List<User> users=userMapper.selectByExample(ue);
 
         if (users!=null&&users.size()>0){
-            return user.getUserPwd().equals(users.get(0).getUserPwd());
+            User uuer02=users.get(0);
+            System.out.println("123+"+uuer02.toString());
+            return MD5Util.encrypt(MD5Util.encrypt(user.getUserPwd())).equals(users.get(0).getUserPwd());
         }
         return false;
     }
@@ -45,7 +48,7 @@ public class UserServiceImpl implements UserService {
         jsonUser = URLEncoder.encode(jsonUser,"UTF-8");
         System.out.println("jsonUser2 = " + jsonUser);
         Cookie cookie = new Cookie("REMEMBER_PASSWORD", jsonUser);
-        cookie.setMaxAge(60 * 60);
+        cookie.setMaxAge(60 * 36000*24);
         response.addCookie(cookie);
     }
 

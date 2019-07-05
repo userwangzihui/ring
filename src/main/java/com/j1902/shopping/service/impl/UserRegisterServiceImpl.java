@@ -5,6 +5,7 @@ import com.j1902.shopping.mapper.UserMapper;
 import com.j1902.shopping.pojo.User;
 import com.j1902.shopping.pojo.UserExample;
 import com.j1902.shopping.service.UserRegisterService;
+import com.j1902.shopping.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,8 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 
     @Override
     public void setUser(User user) {
-
         System.out.println("user = " + user.toString());
+        user.setUserPwd(MD5Util.encrypt(MD5Util.encrypt(user.getUserPwd())));
         userMapper.insertSelective(user);
     }
 
