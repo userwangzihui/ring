@@ -102,10 +102,10 @@
 
                 <div id="ctl00_ucheader_pllogin2">
 
-                <li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
+                <li><a><span id="ctl00_ucheader_lit" th:text="${session.USER_LOGIN.userName}"></span></a></li>
                <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
                 <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
-                <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
+                <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="/pageCart">购物车</a><i>(0)</i></li>
 
 					</div>
             </ul>
@@ -125,12 +125,12 @@
        <div class="nav-div">
         <div class="navdiv_top">
          <div class="navdiv-right">
-          <p> <a href="TrueLove.html"> 查看所有款</a></p>
-          <p> <a href="/dr_series/12_22.html">Forever系列</a></p>
-          <p> <a href="/dr_series/11_20.html">My Heart系列</a></p>
-          <p> <a href="/dr_series/16_30.html">True Love系列</a></p>
-          <p> <a href="/dr_series/15_28.html">I Swear系列</a></p>
-          <p> <a href="/dr_series/13_24.html">Just you系列</a></p>
+             <p> <a href="/getItemAll"> 查看所有款</a></p>
+             <p> <a href="/getBySeries?itemSeries=Forever系列">Forever系列</a></p>
+             <p> <a href="/getBySeries?itemSeries=MyHeart系列">My Heart系列</a></p>
+             <p> <a href="/getBySeries?itemSeries=TrueLove系列">True Love系列</a></p>
+             <p> <a href="/getBySeries?itemSeries=ISwear系列">I Swear系列</a></p>
+             <p> <a href="/getBySeries?itemSeries=JustYou系列">Just you系列</a></p>
          </div>
          <div class="navdiv-left">
           <h3> NEW</h3>

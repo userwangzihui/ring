@@ -143,7 +143,6 @@ public class UserHomeController {
         CountOrder countOrder = userHomeService.getByCountIdCountOrder(countId);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
         String format = simpleDateFormat.format(countOrder.getCountCreatetime());
-
         UserAddress userAddress = userHomeService.getUserAddress(countOrder.getCountAddress());
         Order order = userHomeService.getByOrderIdOrder(orderId);
         Item item = itemService.getById(order.getOrderItemId());

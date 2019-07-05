@@ -17,4 +17,5 @@ public interface UserService {
 
     public void addCookie(String user, HttpServletResponse response) throws UnsupportedEncodingException;
     public List<User> getByPhone(User user);
+    public boolean getByUserName(String userName);
 }

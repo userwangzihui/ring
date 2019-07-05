@@ -442,6 +442,7 @@
 	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 		<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 	</a>
+	<input id="success" hidden th:value="${success}">
 </div><!-- /.main-container -->
 
 <!-- basic scripts -->
@@ -465,6 +466,11 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+
+	var value = $("#success").val();
+	if (value=="添加成功！！！") {
+		alert(value)
+	}
 	$.post("message",
 			function(data,status){
 				console.log("收到的是："+data+"--");

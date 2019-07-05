@@ -24,7 +24,7 @@
 							<span>求婚钻戒领导品牌</span>
 						</div>
 						<div class="shopt_right fr">
-							<span id="ctl00_ltlUname">你好！KLNgOk</span>
+							<span id="ctl00_ltlUname" th:text="'你好!'+${session.USER_LOGIN.userName}"></span>
 							<a class="my_dr" href="member_index.html">我的DR</a>
 							<a onClick="javascript:logout()" class="tc_dr" href="#">退出</a>
 							<a class="help_dr" href="help.html">帮助中心</a>

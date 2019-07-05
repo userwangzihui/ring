@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -17,7 +18,7 @@ public class AddItemController {
     @Autowired
     AddItemService addItemService;
     @RequestMapping("/addItem")
-    public String addItem(Item item,MultipartFile file,MultipartFile file1,MultipartFile file2,MultipartFile file3) throws IOException {
+    public String addItem(Map<String,Object> map ,Item item, MultipartFile file, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
         System.out.println("item = " + item);
         System.out.println("file = " + file);
         System.out.println("file = " + file1);
@@ -65,7 +66,8 @@ public class AddItemController {
         }
         //修改数据库
         addItemService.addItem(item);
-        return "back/goods";
+        map.put("success","添加成功！！！");
+        return "back/goods_add";
     }
     @RequestMapping("/deleteItem")
     public String deleteItem(Integer itemId){

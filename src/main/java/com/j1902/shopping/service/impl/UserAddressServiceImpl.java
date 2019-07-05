@@ -15,11 +15,13 @@ public class UserAddressServiceImpl implements UserAddressService {
     private UserAddressMapper userAddressMapper;
     @Override
     public UserAddress selectByUser(String address,Integer uid) {
+        System.out.println("address = " + address);
+        System.out.println("uid = " + uid);
         UserAddressExample userAddressExample = new UserAddressExample();
         UserAddressExample.Criteria or = userAddressExample.or();
-        or.andAddressIdEqualTo(uid);
-        or.andAddressInfoEqualTo(address);
+        or.andAddressUseridEqualTo(uid).andAddressInfoEqualTo(address);
         List<UserAddress> userAddresses = userAddressMapper.selectByExample(userAddressExample);
+        System.out.println("userAddresses = " + userAddresses);
         return userAddresses!=null?userAddresses.get(0):null;
     }
 }
