@@ -52,7 +52,6 @@ public class UserHomeController {
         System.out.println("1111");
         System.out.println("user = " + userPhone);
         List<User> user = userRegisterService.getUser(userPhone);
-
         session.setAttribute("USER_LOGIN",user.get(0));
         return "front/member_index";
     }

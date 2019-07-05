@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="hb-loaded">
 
 	<head>
 		<title>个人中心 - 首页</title>
@@ -27,7 +27,7 @@
 						<!--登录注册-->
 						<ul class="tright-ul fl">
 							<div id="ctl00_ucheader_pllogin2">
-								<li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
+									<li><a><span id="ctl00_ucheader_lit" th:text="${session.USER_LOGIN.userName}" ></span></a></li>
 								<li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
 								<li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
 								<li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
@@ -105,7 +105,7 @@
 										<li>
 											<h3> -订单中心-</h3>
 											<ul class="member_ul-dr">
-												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
+												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" th:href="@{'member_order?userId='+${session.USER_LOGIN.userId}}">我的订单</a></li>
 												<li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
 												<li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
 
@@ -177,10 +177,10 @@
 											</div>
 											<!--左边end-->
 											<!--右边-->
-											<div class="member_cortr-first-right fr">
-												<img width="90" height="90" src="../../static/images/mem.jpg" />
-												<p><a href="member_avatar.html">编辑个人资料</a></p>
-											</div>
+											<!--<div class="member_cortr-first-right fr">-->
+												<!--<img width="90" height="90" src="../../static/images/mem.jpg" />-->
+												<!--<p><a href="member_avatar.html">编辑个人资料</a></p>-->
+											<!--</div>-->
 											<!--右边end-->
 										</div>
 										<!--第一块end-->

@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="hb-loaded">
 
 	<head>
 		<meta charset="utf-8" />
@@ -14,6 +14,7 @@
 			$(function() {
 				$("#street").blur(function() {
 					var street = $("#street").val();
+					alert(street)
 					if (street == "") {
 						$("#strwrong").text("请输入详细地址！");
 						$("#streeid").show();
@@ -84,7 +85,6 @@
 						$("#shrid").show();
 						return false;
 					} else {
-						$("#shrid").hide();
 						$("#shry").show();
 
 					}
@@ -129,7 +129,6 @@
 					var addressInfo=$("#street").val()
 					 var addressCode=$("#postcode").val()
 					 var addressPhone=$("#mobile").val()
-					alert(addressUserid)
 				$.post("getAndUpdateAddress",{addressId:addressId,
 					addressUserid:addressUserid,
 					addressTousername:addressTousername,
@@ -475,7 +474,6 @@ $("#brn").click(function () {
 								}
 							});
 						}
-
 					</script>
 				</div>
 				<!--底部-->
