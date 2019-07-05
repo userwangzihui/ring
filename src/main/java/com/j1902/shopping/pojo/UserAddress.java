@@ -60,5 +60,16 @@ public class UserAddress {
     public void setAddressCode(String addressCode) {
         this.addressCode = addressCode == null ? null : addressCode.trim();
     }
-    
+
+    @Override
+    public String toString() {
+        return "UserAddress{" +
+                "addressId=" + addressId +
+                ", addressUserid=" + addressUserid +
+                ", addressTousername='" + addressTousername + '\'' +
+                ", addressInfo='" + addressInfo + '\'' +
+                ", addressPhone='" + addressPhone + '\'' +
+                ", addressCode='" + addressCode + '\'' +
+                '}';
+    }
 }

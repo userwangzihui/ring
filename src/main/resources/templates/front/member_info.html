@@ -381,9 +381,9 @@
 										<li>
 											<h3> -订单中心-</h3>
 											<ul class="member_ul-dr">
-												<li id="ctl00_content_treeId_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
-												<li id="ctl00_content_treeId_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
-												<li id="ctl00_content_treeId_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
+												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" th:href="@{'member_order?userId='+${session.USER_LOGIN.userId}}">我的订单</a></li>
+												<li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
+												<li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
 
 											</ul>
 										</li>
@@ -391,9 +391,9 @@
 										<li>
 											<h3> -帐户管理-</h3>
 											<ul class="member_ul-dr">
-												<li class="speacil_color" id="ctl00_content_treeId_myinfo"><a rel="nofollow" href="member_info.html">个人信息</a></li>
-												<li id="ctl00_content_treeId_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
-												<li id="ctl00_content_treeId_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
+												<li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" th:href="@{'member_info?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}" >个人信息</a></li>
+												<li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
+												<li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" th:href="@{'address?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}">收货地址</a></li>
 
 											</ul>
 										</li>
@@ -415,13 +415,13 @@
 
 												<div class="person-cort_left-write">
 													<span>昵&nbsp;&nbsp;称：</span>
-													<input type="text"  class="write_text" id="nicname" name="userName" />
+													<input type="text"  class="write_text" id="nicname" name="userName" th:value="${USER.userName}" />
 													<span style="display: none" id="shrid"><i class="writer_wrong"></i><em id="shrwrong" class="writer_word"></em></span>
 													<span id="shry" style="display: none"><i class="writer_right"> </i></span>
 												</div>
 												<div class="person-cort_left-write">
 													<span>真实姓名：</span>
-													<input type="text" value="" class="write_text" id="realName" name="userRealname"/>
+													<input type="text" th:value="${USER.userRealname}" class="write_text" id="realName" name="userRealname"/>
 													<span style="display: none" id="realId"><i class="writer_wrong"></i><em id="realwrong" class="writer_word"></em></span>
 													<span id="realy" style="display: none"><i class="writer_right"> </i></span>
 												</div>
@@ -442,7 +442,7 @@
 
 												<div class="person-cort_left-write">
 													<span class="write_vtop">详细地址：</span>
-													<textarea id="street" cols="20" rows="2" name="ctl00$content$street"></textarea>
+													<textarea th:text="${USER.userAddress}" id="street" cols="20" rows="2" name="ctl00$content$street"></textarea>
 													<span id="streid" style="display: none"><i class="writer_wrong"></i><em id="strewrong" class="writer_word"></em></span>
 													<span id="strey" style="display: none"><i class="writer_right"> </i></span>
 												</div>
@@ -457,16 +457,13 @@
 												<div id="btnsave" class="bt1 person-cort_left-button">
 													&gt; 保存
 												</div>
-												<div class="bt1 person-cort_left-button">
-													<button id="but">提交</button>
-												</div>
 											</div>
 											<!--左边end-->
 											<!--右边-->
-											<div class="member_person-cort_right">
-												<a href="#"> <img width="90" height="90" src="../../static/images/mem.jpg" /> </a>
-												<p> <a href="dr_personuploadtx.aspx">更换头像</a> </p>
-											</div>
+											<!--<div class="member_person-cort_right">-->
+												<!--<a href="#"> <img width="90" height="90" src="../../static/images/mem.jpg" /> </a>-->
+												<!--<p> <a href="dr_personuploadtx.aspx">更换头像</a> </p>-->
+											<!--</div>-->
 											<!--右边end-->
 										</div>
 										<!--个人信息填写end-->

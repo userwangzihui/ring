@@ -353,18 +353,20 @@ $("#brn").click(function () {
 										<li>
 											<h3> -订单中心-</h3>
 											<ul class="member_ul-dr">
-												<li id="ctl00_content_treeId_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
-												<li id="ctl00_content_treeId_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
-												<li id="ctl00_content_treeId_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
+												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" th:href="@{'member_order?userId='+${session.USER_LOGIN.userId}}">我的订单</a></li>
+												<li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
+												<li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
+
 											</ul>
 										</li>
 
 										<li>
 											<h3> -帐户管理-</h3>
 											<ul class="member_ul-dr">
-												<li id="ctl00_content_treeId_myinfo"><a rel="nofollow" href="member_info.html">个人信息</a></li>
-												<li id="ctl00_content_treeId_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
-												<li class="speacil_color" id="ctl00_content_treeId_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
+												<li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" th:href="@{'member_info?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}" >个人信息</a></li>
+												<li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
+												<li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" th:href="@{'address?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}">收货地址</a></li>
+
 											</ul>
 										</li>
 									</ul>
@@ -397,7 +399,7 @@ $("#brn").click(function () {
 														<p> </p>
 													</td>
 													<td class="member_adress-td4" id="address_code" th:text="${us.addressCode}"> </td>
-													<td class="member_adress-td5"> <input type="radio" checked="checked" name="adress" id="61921" value="61921" onClick="szdefault(61921);" /> <a th:href="@{'javascript:showAddress('+${us.addressId}+');'}" id="rem">修改</a><i>|</i><a th:href="@{'javascript:deleteAddress('+${us.addressId}+');'}">删除</a>														</td>
+													<td class="member_adress-td5"> <input type="radio"  name="adress" id="61921" value="61921" onClick="szdefault(61921);" /> <a th:href="@{'javascript:showAddress('+${us.addressId}+');'}" id="rem">修改</a><i>|</i><a th:href="@{'javascript:deleteAddress('+${us.addressId}+');'}">删除</a>														</td>
 												</tr>
 											</tbody>
 										</table>

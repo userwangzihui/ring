@@ -18,5 +18,8 @@ public interface UserHomeService {
     public List<Order> getOrders(Integer orderCountId);
     public CountOrder getByCountIdCountOrder(Integer countId);
     public Order getByOrderIdOrder(Integer orderId);
-
+    public void deleteByIdOrder(Integer orderId);
+    public User getByUserId(Integer userId);
+    public void updateUserIdCountOrder(CountOrder countOrder );
+    public UserAddress getUserAddress(String addressInfo);
 }

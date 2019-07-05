@@ -80,6 +80,10 @@ public class LoginController {
                 userService.deleteCookie(request, response);
             }
             List<User> users = userService.getByPhone(user);
+            if (users.get(0).getUserRealname()!=null){
+                session.setAttribute("USER_LOGIN",users.get(0));
+                return "front/member_index";
+            }
             session.setAttribute("USER_LOGIN",users.get(0));
            return "front/member_info";
         } else if ("true".equals(rememberPassword)) {

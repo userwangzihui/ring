@@ -39,14 +39,21 @@ public class UserHomeController {
         }
         return "2";
     }
+    //跳个人信息页面
+    @RequestMapping("member_info")
+    public String userInfo(User user,Map<String,Object> map){
+        User byUserId = userHomeService.getByUserId(user.getUserId());
+        map.put("USER",byUserId);
+        return "front/member_info";
+    }
 //跳主页
     @RequestMapping("/member_index")
-    public String aaa(String userPhone, Map<String,Object> map, HttpSession session){
+    public String index(String userPhone, Map<String,Object> map, HttpSession session){
         System.out.println("1111");
         System.out.println("user = " + userPhone);
         List<User> user = userRegisterService.getUser(userPhone);
 
-        session.setAttribute("user",user.get(0));
+        session.setAttribute("USER_LOGIN",user.get(0));
         return "front/member_index";
     }
     //跳收货地址
@@ -109,7 +116,7 @@ public class UserHomeController {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
                 String format = simpleDateFormat.format(countOrder1.getCountCreatetime());
                 System.out.println("format = " + format);
-                orderFrom.setOrderNumber("2016400"+order1.getOrderCountId());
+                orderFrom.setOrderNumber(order1.getOrderCountId()+"");
                 orderFrom.setOrderTime(format);
                 orderFrom.setItemNumber(order1.getOrderNumber());
                 orderFrom.setMoneys(order1.getOrderMoney());
@@ -121,16 +128,41 @@ public class UserHomeController {
                 orderFroms.add(orderFrom);
             }
         }
+        map.put("userId",userId);
         map.put("OrderFrom",orderFroms);
         return "front/member_order";
     }
+    //查看订单详情
     @RequestMapping("member_order_detail")
     public String memberOrderDetail( Map<String,Object> map ,Integer countId,Integer orderId){
+        System.out.println("countId = " + countId);
+        System.out.println("orderId = " + orderId);
         CountOrder countOrder = userHomeService.getByCountIdCountOrder(countId);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(countOrder.getCountCreatetime());
+
+        UserAddress userAddress = userHomeService.getUserAddress(countOrder.getCountAddress());
         Order order = userHomeService.getByOrderIdOrder(orderId);
+        Item item = itemService.getById(order.getOrderItemId());
         map.put("CountOrder",countOrder);
         map.put("Order",order);
+        map.put("Item",item);
+        map.put("time",format);
+        map.put("userAddress",userAddress);
         return "front/member_order_detail";
+    }
+    //删除用户订单
+    @RequestMapping("deleteOrders")
+    public String deleteOrders(Integer orderId,Integer userId) {
+        userHomeService.deleteByIdOrder(orderId);
+    return "redirect:../member_order?userId="+userId;
+    }
+    //订单支付
+    @RequestMapping("countSat")
+    public String countSat(CountOrder countOrder) {
+        countOrder.setCountSat("已处理");
+        userHomeService.updateUserIdCountOrder(countOrder);
+        return "redirect:../member_order?userId="+countOrder.getCountUserid();
     }
 }
 

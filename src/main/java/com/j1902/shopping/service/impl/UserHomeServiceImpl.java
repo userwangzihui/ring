@@ -102,4 +102,32 @@ public class UserHomeServiceImpl implements UserHomeService {
         return order;
     }
 
+    @Override
+    public void deleteByIdOrder(Integer orderId) {
+        orderMapper.deleteByPrimaryKey(orderId);
+    }
+
+    @Override
+    public User getByUserId(Integer userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        return user;
+    }
+
+    @Override
+    public void updateUserIdCountOrder(CountOrder countOrder) {
+        CountOrderExample countOrderExample = new CountOrderExample();
+        CountOrderExample.Criteria criteria = countOrderExample.or();
+        criteria.andCountIdEqualTo(countOrder.getCountId());
+        countOrderMapper.updateByExampleSelective(countOrder,countOrderExample);
+    }
+
+    @Override
+    public UserAddress getUserAddress(String addressInfo) {
+        UserAddressExample userAddressExample = new UserAddressExample();
+        UserAddressExample.Criteria criteria = userAddressExample.or();
+        criteria.andAddressInfoEqualTo(addressInfo);
+        List<UserAddress> userAddresses = userAddressMapper.selectByExample(userAddressExample);
+        return userAddresses.get(0);
+    }
+
 }
