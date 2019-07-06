@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="hb-loaded">
 
 	<head>
 		<title>个人中心 - 首页</title>
@@ -27,10 +27,10 @@
 						<!--登录注册-->
 						<ul class="tright-ul fl">
 							<div id="ctl00_ucheader_pllogin2">
-								<li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
+									<li><a><span id="ctl00_ucheader_lit" th:text="${session.USER_LOGIN.userName}" ></span></a></li>
 								<li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
 								<li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
-								<li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
+								<li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="/pageCart">购物车</a><i th:text="'('+${session.CART_NUMBER}+')'"></i></li>
 							</div>
 						</ul>
 					</div>
@@ -49,12 +49,12 @@
 							<div class="nav-div">
 								<div class="navdiv_top">
 									<div class="navdiv-right">
-										<p> <a href="TrueLove.html"> 查看所有款</a></p>
-										<p> <a href="/dr_series/12_22.html">Forever系列</a></p>
-										<p> <a href="/dr_series/11_20.html">My Heart系列</a></p>
-										<p> <a href="/dr_series/16_30.html">True Love系列</a></p>
-										<p> <a href="/dr_series/15_28.html">I Swear系列</a></p>
-										<p> <a href="/dr_series/13_24.html">Just you系列</a></p>
+										<p> <a href="/getItemAll"> 查看所有款</a></p>
+										<p> <a href="/getBySeries?itemSeries=Forever系列">Forever系列</a></p>
+										<p> <a href="/getBySeries?itemSeries=MyHeart系列">My Heart系列</a></p>
+										<p> <a href="/getBySeries?itemSeries=TrueLove系列">True Love系列</a></p>
+										<p> <a href="/getBySeries?itemSeries=ISwear系列">I Swear系列</a></p>
+										<p> <a href="/getBySeries?itemSeries=JustYou系列">Just you系列</a></p>
 									</div>
 									<div class="navdiv-left">
 										<h3> NEW</h3>
@@ -105,7 +105,7 @@
 										<li>
 											<h3> -订单中心-</h3>
 											<ul class="member_ul-dr">
-												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
+												<li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" th:href="@{'member_order?userId='+${session.USER_LOGIN.userId}}">我的订单</a></li>
 												<li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
 												<li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
 
@@ -115,9 +115,9 @@
 										<li>
 											<h3> -帐户管理-</h3>
 											<ul class="member_ul-dr">
-												<li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="member_info.html">个人信息</a></li>
+												<li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" th:href="@{'member_info?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}" >个人信息</a></li>
 												<li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
-												<li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
+													<li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" th:href="@{'address?userPhone='+${session.USER_LOGIN.userPhone}+'&userId='+${session.USER_LOGIN.userId}}">收货地址</a></li>
 
 											</ul>
 										</li>
@@ -134,7 +134,7 @@
 												<!--名字-->
 												<div class="member_first-left-top">
 													<div class="mb_theleft fl">
-														<span>您好！</span>
+														<span th:text="'您好！'+${session.USER_LOGIN.userName}"></span>
 														<a href="member_info.html">（个人信息完善）</a>
 													</div>
 												</div>
@@ -177,10 +177,10 @@
 											</div>
 											<!--左边end-->
 											<!--右边-->
-											<div class="member_cortr-first-right fr">
-												<img width="90" height="90" src="../../static/images/mem.jpg" />
-												<p><a href="member_avatar.html">编辑个人资料</a></p>
-											</div>
+											<!--<div class="member_cortr-first-right fr">-->
+												<!--<img width="90" height="90" src="../../static/images/mem.jpg" />-->
+												<!--<p><a href="member_avatar.html">编辑个人资料</a></p>-->
+											<!--</div>-->
 											<!--右边end-->
 										</div>
 										<!--第一块end-->

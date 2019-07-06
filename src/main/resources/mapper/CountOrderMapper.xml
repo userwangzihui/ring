@@ -309,6 +309,14 @@
   where
   count_sat = #{sta}
   </select>
+  <select id="selectByCountId" parameterType="java.lang.Integer" resultMap="countOrders">
+  select
+  <include refid="Base_Column_List"/>
+  from
+  count_order
+  where
+  count_id = #{id}
+  </select>
 
 
   <insert id="insertByKey" useGeneratedKeys="true" keyProperty="countId"  parameterType="com.j1902.shopping.pojo.CountOrder">

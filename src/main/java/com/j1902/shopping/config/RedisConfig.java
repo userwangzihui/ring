@@ -1,3 +1,4 @@
+/*
 package com.j1902.shopping.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -40,3 +41,4 @@ public class RedisConfig {
         return template;
     }
 }
+*/

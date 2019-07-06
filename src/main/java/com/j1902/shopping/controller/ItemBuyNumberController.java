@@ -5,7 +5,6 @@ import com.j1902.shopping.pojo.Item;
 import com.j1902.shopping.pojo.User;
 import com.j1902.shopping.service.CartService;
 import com.j1902.shopping.service.ItemService;
-import com.j1902.shopping.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +19,9 @@ public class ItemBuyNumberController {
     ItemService itemService;
     @Autowired
     CartService cartService;
-    @Autowired
-    RedisUtils redisUtils;
 
-   /* @RequestMapping("/index")
+
+    @RequestMapping("/index")
     public String ItemBuyNumber(HttpSession session, Map<String, Object> map) {
         List<Item> byBuyNumber = itemService.getByBuyNumber();
         User user = (User) session.getAttribute("USER_LOGIN");
@@ -37,8 +35,8 @@ public class ItemBuyNumberController {
         }
 
         return "front/index";
-    }*/
-   // 使用redis查询首页
+    }
+  /* // 使用redis查询首页
    @RequestMapping("/index")
     public String ItemBuyNumber(HttpSession session, Map<String, Object> map) {
         List<Item> byBuyNumber = itemService.getByBuyNumber();
@@ -55,7 +53,7 @@ public class ItemBuyNumberController {
         }
 
         return "front/index";
-    }
+    }*/
 
     @RequestMapping("/ItemPrice")
     public String ItemPrice(HttpSession session, Map<String, Object> map) {

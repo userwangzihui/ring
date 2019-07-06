@@ -93,7 +93,7 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from `order`
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.j1902.shopping.pojo.OrderExample">

@@ -3,6 +3,7 @@ package com.j1902.shopping.controller;
 import com.aliyuncs.exceptions.ClientException;
 import com.j1902.shopping.pojo.User;
 import com.j1902.shopping.service.UserRegisterService;
+import com.j1902.shopping.service.UserService;
 import com.j1902.shopping.utils.RandomCreatUtil;
 import com.j1902.shopping.utils.SendTelSms;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +12,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class RegisterController {
     @Autowired
     private UserRegisterService userService;
+    @Autowired
+    UserService userServiceS;
 
-    @RequestMapping("/register")
-    public String register(User user) {
+    @RequestMapping("register")
+    public String register(User user, HttpSession session) {
         System.out.println("user = " + user.toString());
          userService.setUser(user);
-        return "front/frontLogin";
+        return "front/login";
     }
-    @RequestMapping("/yzm")
+    @RequestMapping("yzm")
     @ResponseBody
     public String yZM(String phone) throws ClientException {
         System.out.println("phone = " + phone);
-
         String s = RandomCreatUtil.codeCreate(4);
         SendTelSms.sendSms(phone,s);
         return s;

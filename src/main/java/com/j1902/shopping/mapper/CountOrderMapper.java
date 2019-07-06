@@ -14,6 +14,7 @@ public interface CountOrderMapper {
     long countByExample(CountOrderExample example);
 
     List<OrdersQv> selectBySta(@Param(value = "sta") String id);
+    List<OrdersQv> selectByCountId(Integer id);
 
     int deleteByExample(CountOrderExample example);
 
