@@ -24,4 +24,9 @@ public class UserAddressServiceImpl implements UserAddressService {
         System.out.println("userAddresses = " + userAddresses);
         return userAddresses!=null?userAddresses.get(0):null;
     }
+
+    @Override
+    public void insert(UserAddress userAddress) {
+        userAddressMapper.insert(userAddress);
+    }
 }

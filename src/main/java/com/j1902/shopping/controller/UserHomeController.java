@@ -2,6 +2,7 @@ package com.j1902.shopping.controller;
 
 import com.j1902.shopping.pojo.*;
 import com.j1902.shopping.service.ItemService;
+import com.j1902.shopping.service.UserAddressService;
 import com.j1902.shopping.service.UserHomeService;
 import com.j1902.shopping.service.UserRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class UserHomeController {
     private UserRegisterService userRegisterService;
     @Autowired
     public ItemService itemService;
+    @Autowired
+    public UserAddressService userAddressService;
     //个人信息
     @RequestMapping("/personalData")
     @ResponseBody
@@ -32,7 +35,13 @@ public class UserHomeController {
         Date date =simpleDateFormat.parse(year+"-"+month+"-"+day);
         System.out.println("date = " + date.toString());
         user.setUserBirthday(date);
-
+        UserAddress userAddress = new UserAddress();
+        userAddress.setAddressCode("435400");
+        userAddress.setAddressInfo(user.getUserAddress());
+        userAddress.setAddressPhone(user.getUserPhone());
+        userAddress.setAddressUserid(user.getUserId());
+        userAddress.setAddressTousername(user.getUserRealname());
+        userAddressService.insert(userAddress);
         if (userHomeService.setPersonalData(user)){
             session.setAttribute("user",user);
             return "1";

@@ -132,4 +132,10 @@ public class Test {
     public String toMemberInfo(){
         return "fornt/member_info";
     }
+
+    @RequestMapping("/loginout")
+    public String loginOut(HttpSession session){
+        session.removeAttribute("USER_LOGIN");
+        return "redirect:frontLogin";
+    }
 }

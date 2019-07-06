@@ -5,4 +5,5 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public interface UserAddressService {
     UserAddress selectByUser(String address,Integer uid);
+    void insert(UserAddress userAddress);
 }
