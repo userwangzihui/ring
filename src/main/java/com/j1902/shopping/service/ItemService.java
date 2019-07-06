@@ -7,7 +7,7 @@ import com.j1902.shopping.pojo.User;
 import java.util.List;
 
 public interface ItemService {
-    public List<Item> getByItem();
+    public void getByItem();
     public List<Item> getByBuyNumber();
     public List<Item> getByPrice();
     public Item getById(Integer id);

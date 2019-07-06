@@ -8,18 +8,25 @@ import com.j1902.shopping.pojo.CartExample;
 import com.j1902.shopping.pojo.Item;
 import com.j1902.shopping.pojo.ItemExample;
 import com.j1902.shopping.service.ItemService;
+import com.j1902.shopping.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemMapper itemMapper;
+    @Autowired
+    private RedisUtils redisUtils;
     @Override
-    public List<Item> getByItem() {
+    public void getByItem() {
         List<Item> items = itemMapper.selectByExample(null);
-        return items;
+        String join = String.join(",", items.toArray());
+        redisUtils.set("indexItems",join);
     }
 
     @Override
@@ -44,9 +51,6 @@ public class ItemServiceImpl implements ItemService {
     public PageInfo<Item> getItemAll(Integer currentPage, Integer number) {
        PageHelper.startPage(currentPage,number);
         List<Item> items = itemMapper.selectByExample(null);
-        for (Item item : items) {
-            System.out.println("item = " + item);
-        }
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
         return itemPageInfo;
     }

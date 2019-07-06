@@ -127,4 +127,9 @@ public class Test {
         int i = orderService.selectWaitCountOrder();
         return i;
     }
+
+    @RequestMapping("/toMemberInfo")
+    public String toMemberInfo(){
+        return "fornt/member_info";
+    }
 }

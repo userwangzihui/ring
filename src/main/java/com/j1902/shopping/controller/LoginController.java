@@ -70,8 +70,6 @@ public class LoginController {
     public String login(User user, HttpServletRequest request, HttpServletResponse response, Map<String, Object> map, HttpSession session) throws UnsupportedEncodingException {
         String userphone = request.getParameter("userphone");
         String rememberPassword = request.getParameter("rememberPassword");
-        System.out.println("rememberPassword = " + rememberPassword);
-        System.out.println("user = " + user.toString());
         if (userService.login(user)) {
             if ("true".equals(rememberPassword)) {
                 userService.rememberPwd(user, response);
@@ -80,8 +78,12 @@ public class LoginController {
             }
             List<User> users = userService.getByPhone(user);
             session.setAttribute("USER_LOGIN",users.get(0));
-
-
+            //判断是否是新注册用户
+            System.out.println(users.get(0));
+            if(users.get(0).getUserRealname()==null){
+                System.out.println("没有完全注册");
+                return "front/member_info";
+            }
             return "redirect:index";
         } else if ("true".equals(rememberPassword)) {
             userService.addCookie(user.getUserPhone(), response);

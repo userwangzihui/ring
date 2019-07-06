@@ -28,7 +28,7 @@ public class AddItemController {
         //保存到服务器中的文件名
         String systemFileName = null;
         //服务器文件保存的位置
-        String systemUploadLocation = "D:";
+        String systemUploadLocation = "G:";
 
 //        //当上传的文件不为空时
 //        String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -38,28 +38,28 @@ public class AddItemController {
 
         if(!file.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/f/"+systemFileName + "-" + file.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file.getOriginalFilename();
             //上传文件
             file.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg1(systemFileName);
         }
         if(!file1.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/f/"+systemFileName + "-" + file1.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file1.getOriginalFilename();
             //上传文件
             file1.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg2(systemFileName);
         }
         if(!file2.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/f/"+systemFileName + "-" + file2.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file2.getOriginalFilename();
             //上传文件
             file2.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg3(systemFileName);
         }
         if(!file3.isEmpty()){
             systemFileName = UUID.randomUUID().toString();
-            systemFileName = "/f/"+systemFileName + "-" + file3.getOriginalFilename();
+            systemFileName = "/upload/"+systemFileName + "-" + file3.getOriginalFilename();
             //上传文件
             file3.transferTo(new File(systemUploadLocation+systemFileName));
             item.setItemImg4(systemFileName);

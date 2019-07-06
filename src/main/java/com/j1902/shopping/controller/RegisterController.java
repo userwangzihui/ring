@@ -18,13 +18,13 @@ public class RegisterController {
     @Autowired
     private UserRegisterService userService;
 
-    @RequestMapping("register")
+    @RequestMapping("/register")
     public String register(User user) {
         System.out.println("user = " + user.toString());
          userService.setUser(user);
-        return "front/login";
+        return "front/frontLogin";
     }
-    @RequestMapping("yzm")
+    @RequestMapping("/yzm")
     @ResponseBody
     public String yZM(String phone) throws ClientException {
         System.out.println("phone = " + phone);

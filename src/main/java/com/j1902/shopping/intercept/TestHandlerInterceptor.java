@@ -1,5 +1,7 @@
 package com.j1902.shopping.intercept;
 
+import com.j1902.shopping.pojo.User;
+import com.sun.org.apache.bcel.internal.generic.I2F;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,12 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 public class TestHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    /*    System.out.println("TestHandlerInterceptor.preHandle");
-        String contextPath = request.getContextPath();
-        System.out.println("contextPath = " + contextPath);
-        System.out.println("这个是："+handler);
-        String requestURI = request.getRequestURI();
-        System.out.println("requestURI = " + requestURI);*/
+        User user = (User) request.getSession().getAttribute("USER_LOGIN");
+
         return true;
     }
 

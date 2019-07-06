@@ -16,10 +16,8 @@ import org.springframework.stereotype.Component;
  */
 @SuppressWarnings("unchecked")
 @Component
-public class RedisUtils {
+public class RedisUtils extends RedisTemplate<String,Object> {
     @SuppressWarnings("rawtypes")
-    @Autowired
-    private RedisTemplate redisTemplate;
     /**
      * 批量删除对应的value
      *
